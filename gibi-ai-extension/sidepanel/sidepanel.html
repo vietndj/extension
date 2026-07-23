@@ -48,9 +48,8 @@
         </div>
         <div>
           <div class="brand-title" style="display: flex; align-items: center; gap: 6px;">
-            <span id="title-text">Trợ lý GIBI</span>
-            <span class="brand-badge" style="background: linear-gradient(135deg, #38BDF8 0%, #059669 100%); color: #fff;">Ghibli</span>
-            <span id="edit-name-btn" style="cursor: pointer; opacity: 0.7; font-size: 11px; user-select: none;" title="Nhấp chuột để đổi tên">✏️</span>
+            <span id="title-text">GIBI AI</span>
+            <span class="brand-badge" style="background: linear-gradient(135deg, #38BDF8 0%, #059669 100%); color: #fff;">Studio</span>
             <button id="btn-reset-project" class="gibi-btn-icon-mini" title="Reset Dự Án">🔄</button>
           </div>
           <div class="brand-subtitle"><span class="status-dot online"></span>Trợ lý Đạo diễn Phim Ghibli & Teleprompter</div>
@@ -58,32 +57,7 @@
       </div>
     </header>
 
-    <!-- Onboarding Name View (Premium Redesigned Card) -->
-    <section id="panel-onboarding" class="onboarding-panel">
-      <div class="onboarding-card">
-        <div class="onboarding-avatar">🍃</div>
-        <h2 class="onboarding-title">Chào Bạn! Gibi Rất Vui Được Gặp Bạn</h2>
-        
-        <div class="onboarding-bubble">
-          <p>
-            Mình là <strong>Gibi 🎬</strong> — trợ lý AI đồng hành đạo diễn kịch bản và sản xuất phim hoạt hình Studio Ghibli cùng bạn.<br><br>
-            Trước khi bắt đầu, <strong>bạn tên là gì</strong> để Gibi tiện xưng hô và cá nhân hóa trợ lý cho riêng bạn nhé?
-          </p>
-        </div>
-
-        <div class="onboarding-form">
-          <div class="input-wrapper">
-            <span class="input-icon">👤</span>
-            <input type="text" id="input-user-name" autocomplete="off" placeholder="Nhập tên của bạn (Vd: Việt)...">
-          </div>
-          <button id="btn-save-name" class="gibi-btn-primary full-width">
-            ✨ Bắt Đầu Đồng Hành Cùng Gibi
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Stepper Navigation -->
+    <!-- Stepper Navigation (Always Visible) -->
     <nav id="gibi-stepper-nav" class="gibi-stepper">
       <div class="stepper-step active" data-step="0">
         <span class="step-num">0</span>
@@ -149,7 +123,7 @@
           <span class="card-icon">🔒</span>
           <h2>Giai Đoạn 1: Ép Khuôn Nhân Vật</h2>
         </div>
-        <p class="phase-desc">Gibi đã tạo 'Ảnh Căn Cước'. Vui lòng kiểm tra thần thái nét mặt nhân vật trên Gemini Chat.</p>
+        <p class="phase-desc">Gibi AI đã tạo 'Ảnh Căn Cước'. Vui lòng kiểm tra thần thái nét mặt nhân vật trên Gemini Chat.</p>
 
         <div class="action-buttons-group">
           <button id="btn-lock-face-yes" class="gibi-btn-success full-width">
@@ -176,7 +150,7 @@
           </div>
           <div id="teleprompter-screen" class="teleprompter-screen">
             <div id="teleprompter-text" class="teleprompter-text">
-              Chưa có kịch bản thoại. Hãy chạy Giai đoạn 2 trên Gemini để Gibi tải kịch bản...
+              Chưa có kịch bản thoại. Hãy chạy Giai đoạn 2 trên Gemini để Gibi AI tải kịch bản...
             </div>
           </div>
           <div class="teleprompter-controls">
@@ -212,12 +186,12 @@
         <div id="dropzone-live-action" class="dropzone-card">
           <span class="dropzone-icon">📷</span>
           <span class="dropzone-title">Kéo thả hoặc Tải lên ảnh diễn xuất thật</span>
-          <span class="dropzone-sub">Gibi sẽ lấy Trang phục + Tư thế + Bối cảnh ghép với Mặt đã khóa!</span>
+          <span class="dropzone-sub">Gibi AI sẽ lấy Trang phục + Tư thế + Bối cảnh ghép với Mặt đã khóa!</span>
           <input type="file" id="input-file-live-action" accept="image/*" style="display: none;">
         </div>
 
         <button id="btn-use-auto-scene" class="gibi-btn-outline full-width">
-          🎲 [Phím 0] Lười Chụp - Cho Gibi Tự Bịa Bối Cảnh
+          🎲 [Phím 0] Lười Chụp - Cho Gibi AI Tự Bịa Bối Cảnh
         </button>
       </section>
 
@@ -252,7 +226,7 @@
     <!-- Footer Status Bar -->
     <footer class="gibi-footer">
       <span id="status-indicator" class="status-dot online"></span>
-      <span id="status-text">Gibi đã sẵn sàng trên Gemini Web</span>
+      <span id="status-text">Gibi AI đã sẵn sàng trên Gemini Web</span>
     </footer>
   </div>
 
