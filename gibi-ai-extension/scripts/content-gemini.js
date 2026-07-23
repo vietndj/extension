@@ -147,16 +147,6 @@ KÍCH HOẠT [GIAI ĐOẠN 0] NGAY BÂY GIỜ!`;
             ✨ Kích Hoạt Dự Án Trên Gemini Chat
           </button>
         </div>
-
-        <div class="gibi-drawer-card" style="background: rgba(56, 189, 248, 0.08); border-color: rgba(56, 189, 248, 0.3);">
-          <div style="font-weight: 700; font-size: 12px; color: #38BDF8; display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
-            <span>💡</span> Mẹo Chọn Mô Hình Gemini
-          </div>
-          <p style="font-size: 11px; color: #E0F2FE; line-height: 1.5; margin: 0;">
-            Nên chọn mô hình <strong>Gemini Advanced (Mở Rộng)</strong> ở góc dưới ô chat để AI có bộ nhớ lớn nhất, tự động tạo đủ Code Block + Ảnh tĩnh + Dòng hướng dẫn mà không bị giới hạn token ngắt lời giữa chừng!<br><br>
-            <a href="https://labs.google/fx/vi/tools/flow" target="_blank" style="color: #F5A623; text-decoration: underline; font-weight: 700;">🚀 Mở Google Flow (Veo 3) làm Video chuyển động »</a>
-          </p>
-        </div>
       </div>
     `;
 
