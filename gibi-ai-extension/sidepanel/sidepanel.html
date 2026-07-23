@@ -35,23 +35,28 @@
       </div>
     </header>
 
-    <!-- Onboarding Name View (If Name not set) -->
-    <section id="panel-onboarding" class="phase-panel active" style="display: none;">
-      <div class="card-header">
-        <span class="card-icon">👋</span>
-        <h2>Chào Bạn! Gibi Rất Vui Được Gặp Bạn</h2>
-      </div>
-      <div class="onboarding-box">
-        <p class="phase-desc" style="font-size: 13px; color: var(--text-main); line-height: 1.6;">
-          Mình là <strong>Gibi 🎬</strong> — trợ lý AI đồng hành đạo diễn kịch bản và sản xuất phim hoạt hình Studio Ghibli cùng bạn.<br><br>
-          Trước khi bắt đầu, <strong>bạn tên là gì</strong> để Gibi tiện xưng hô và cá nhân hóa trợ lý cho riêng bạn nhé?
-        </p>
-        <div class="form-group" style="margin-top: 14px;">
-          <input type="text" id="input-user-name" placeholder="Nhập tên của bạn (Vd: Việt, Nam, Mai)..." style="padding: 12px; font-size: 13px; border-radius: var(--radius-md); background: var(--bg-card); border: 1px solid var(--accent-gold); color: #fff; width: 100%;">
+    <!-- Onboarding Name View (Premium Redesigned Card) -->
+    <section id="panel-onboarding" class="phase-panel active">
+      <div class="onboarding-card">
+        <div class="onboarding-avatar">👋</div>
+        <h2 class="onboarding-title">Chào Bạn! Gibi Rất Vui Được Gặp Bạn</h2>
+        
+        <div class="onboarding-bubble">
+          <p>
+            Mình là <strong>Gibi 🎬</strong> — trợ lý AI đồng hành đạo diễn kịch bản và sản xuất phim hoạt hình Studio Ghibli cùng bạn.<br><br>
+            Trước khi bắt đầu, <strong>bạn tên là gì</strong> để Gibi tiện xưng hô và cá nhân hóa trợ lý cho riêng bạn nhé?
+          </p>
         </div>
-        <button id="btn-save-name" class="gibi-btn-primary full-width" style="margin-top: 10px;">
-          ✨ Bắt Đầu Đồng Hành Cùng Gibi
-        </button>
+
+        <div class="onboarding-form">
+          <div class="input-wrapper">
+            <span class="input-icon">👤</span>
+            <input type="text" id="input-user-name" autocomplete="off" placeholder="Nhập tên của bạn (Vd: Việt)...">
+          </div>
+          <button id="btn-save-name" class="gibi-btn-primary full-width">
+            ✨ Bắt Đầu Đồng Hành Cùng Gibi
+          </button>
+        </div>
       </div>
     </section>
 
