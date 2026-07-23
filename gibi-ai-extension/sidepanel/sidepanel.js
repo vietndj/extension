@@ -47,8 +47,11 @@ Gửi sơ đồ sau:
 1. Phân tích ảnh cận mặt CỰC KỲ CHI TIẾT (tập trung vào xương hàm, mí mắt, sống mũi, nốt ruồi, kiểu tóc) thành \`[FINAL_FACE_JSON]\`. TUYỆT ĐỐI KHÔNG MIÊU TẢ QUẦN ÁO HAY CƠ THỂ Ở BIẾN NÀY.
 2. In Prompt vào code block: "Extreme close-up portrait. [FINAL_FACE_JSON]. Wearing a simple t-shirt. Studio Ghibli style. Aspect ratio: [Tỷ lệ]".
 3. In CẢNH BÁO FAIL-SAFE. TỰ VẼ 1 ảnh cận mặt.
-4. Hỏi: "Khuôn mặt này ổn chưa? [Gõ 1]: Khóa làm Hằng số! / [Gõ 2]: Chưa giống (Nói rõ điểm cần sửa trên mặt)."
-(CHỜ GÕ PHÍM. Nếu 1 sang GIAI ĐOẠN 2).
+4. Hỏi: "Khuôn mặt này ổn chưa? 
+   - [Gõ 1]: Quá chuẩn! Khóa khuôn mặt này làm Hằng số vĩnh viễn.
+   - [Gõ 2]: Chưa giống lắm (Nói rõ điểm nào trên mặt cần sửa).
+   - [Gõ 3]: Tải bộ ảnh mới khác để vẽ lại khuôn mặt từ đầu."
+(CHỜ GÕ PHÍM. Nếu 1 sang GIAI ĐOẠN 2. Nếu 3: Yêu cầu người dùng tải 1-3 bức ảnh mới và phân tích lại).
 
 [GIAI ĐOẠN 2: LƯỚI STORYBOARD & VOICEOVER]
 1. Tóm tắt kịch bản thành 16 KHUNG HÌNH (4 hàng).
@@ -111,6 +114,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const btnLockFaceYes = document.getElementById('btn-lock-face-yes');
   const btnLockFaceNo = document.getElementById('btn-lock-face-no');
+  const btnLockFaceReupload = document.getElementById('btn-lock-face-reupload');
 
   const btnExtractVoiceover = document.getElementById('btn-extract-voiceover');
   const teleprompterText = document.getElementById('teleprompter-text');
@@ -287,6 +291,11 @@ Dưới đây là thông tin khởi tạo dự án:
 
   btnLockFaceNo.addEventListener('click', async () => {
     const res = await sendToGemini('INJECT_PROMPT', { promptText: '2' });
+  });
+
+  btnLockFaceReupload.addEventListener('click', async () => {
+    const res = await sendToGemini('INJECT_PROMPT', { promptText: '3' });
+    alert('Đã gửi yêu cầu [Gõ 3]! Bạn hãy tải 1-3 bức ảnh chân dung mới lên ô chat Gemini để AI quét lại nét mặt nhé.');
   });
 
   // Phase 2: Storyboard & Teleprompter
