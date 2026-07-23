@@ -1,4 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+const fs = require('fs');
+const path = require('path');
+const zlib = require('zlib');
+
+// Studio Ghibli Totoro Circular SVG Logo
+const totoroSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
     <!-- Ghibli Sky Blue & Emerald Forest Gradient -->
     <linearGradient id="ghibliSky" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -94,4 +99,120 @@
       <line x1="390" y1="250" x2="330" y2="245" stroke="#334155" stroke-width="4" stroke-linecap="round"/>
     </g>
   </g>
-</svg>
+</svg>`;
+
+// Save SVG to root & icons/
+const rootDir = path.join(__dirname, '..');
+fs.writeFileSync(path.join(rootDir, 'icon.svg'), totoroSvg);
+fs.writeFileSync(path.join(__dirname, 'icon.svg'), totoroSvg);
+
+// Pure Node PNG Encoder for Circular Totoro Icon
+function createCircularTotoroPNG(size) {
+  const rSky = 56, gSky = 189, bSky = 248;       // Ghibli Sky Blue
+  const rTotoro = 148, gTotoro = 163, bTotoro = 184; // Totoro Grey
+  const rBelly = 255, gBelly = 251, bBelly = 235; // Totoro Cream Belly
+  const rGold = 245, gGold = 158, bGold = 11;     // Gold Border
+  const rWhite = 255, gWhite = 255, bWhite = 255;
+  const rBlack = 15, gBlack = 23, bBlack = 42;
+
+  const signature = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]);
+  const ihdr = Buffer.alloc(13);
+  ihdr.writeUInt32BE(size, 0);
+  ihdr.writeUInt32BE(size, 4);
+  ihdr[8] = 8; ihdr[9] = 2; ihdr[10] = 0; ihdr[11] = 0; ihdr[12] = 0;
+  const ihdrChunk = createChunk('IHDR', ihdr);
+
+  const rows = [];
+  const radius = size / 2;
+  const center = size / 2;
+  const borderWidth = Math.max(1, Math.floor(size * 0.06));
+
+  for (let y = 0; y < size; y++) {
+    const row = Buffer.alloc(1 + size * 3);
+    row[0] = 0;
+
+    for (let x = 0; x < size; x++) {
+      const idx = 1 + x * 3;
+      const distFromCenter = Math.hypot(x - center, y - center);
+
+      // Outside circle boundary
+      if (distFromCenter > radius) {
+        row[idx] = 0; row[idx+1] = 0; row[idx+2] = 0;
+      }
+      // Outer Gold Ring Border
+      else if (distFromCenter >= (radius - borderWidth)) {
+        row[idx] = rGold; row[idx+1] = gGold; row[idx+2] = bGold;
+      }
+      // Inside Totoro Emblem & Ghibli Sky
+      else {
+        const relY = (y - center) / radius;
+        const relX = (x - center) / radius;
+
+        // Totoro Eyes (relY around -0.15, relX around -0.18 and +0.18)
+        const leftEyeDist = Math.hypot(relX + 0.18, relY + 0.15);
+        const rightEyeDist = Math.hypot(relX - 0.18, relY + 0.15);
+
+        // Totoro Belly (relY > 0.2, relX around 0)
+        const bellyDist = Math.hypot(relX, relY - 0.38);
+
+        // Totoro Body Outline (center oval)
+        const bodyDist = Math.hypot(relX * 1.1, relY - 0.1);
+
+        if (leftEyeDist < 0.08 || rightEyeDist < 0.08) {
+          if (leftEyeDist < 0.03 || rightEyeDist < 0.03) {
+            row[idx] = rBlack; row[idx+1] = gBlack; row[idx+2] = bBlack;
+          } else {
+            row[idx] = rWhite; row[idx+1] = rWhite; row[idx+2] = rWhite;
+          }
+        } else if (bellyDist < 0.32 && relY > 0.1) {
+          row[idx] = rBelly; row[idx+1] = gBelly; row[idx+2] = bBelly;
+        } else if (bodyDist < 0.45 && relY > -0.4) {
+          row[idx] = rTotoro; row[idx+1] = gTotoro; row[idx+2] = bTotoro;
+        } else {
+          // Ghibli Sky Background
+          row[idx] = rSky; row[idx+1] = gSky; row[idx+2] = bSky;
+        }
+      }
+    }
+    rows.push(row);
+  }
+
+  const rawData = Buffer.concat(rows);
+  const compressedData = zlib.deflateSync(rawData);
+  const idatChunk = createChunk('IDAT', compressedData);
+  const iendChunk = createChunk('IEND', Buffer.alloc(0));
+
+  return Buffer.concat([signature, ihdrChunk, idatChunk, iendChunk]);
+}
+
+function createChunk(type, data) {
+  const len = data.length;
+  const buf = Buffer.alloc(4 + 4 + len + 4);
+  buf.writeUInt32BE(len, 0);
+  buf.write(type, 4, 4, 'ascii');
+  data.copy(buf, 8);
+  const crcVal = crc32(buf.slice(4, 8 + len));
+  buf.writeUInt32BE(crcVal, 8 + len);
+  return buf;
+}
+
+function crc32(buf) {
+  let crc = 0xffffffff;
+  for (let i = 0; i < buf.length; i++) {
+    crc ^= buf[i];
+    for (let j = 0; j < 8; j++) {
+      if (crc & 1) crc = (crc >>> 1) ^ 0xedb88320;
+      else crc = crc >>> 1;
+    }
+  }
+  return (crc ^ 0xffffffff) >>> 0;
+}
+
+// Write PNGs
+fs.writeFileSync(path.join(rootDir, 'icon.png'), createCircularTotoroPNG(128));
+fs.writeFileSync(path.join(__dirname, 'icon-16.png'), createCircularTotoroPNG(16));
+fs.writeFileSync(path.join(__dirname, 'icon-32.png'), createCircularTotoroPNG(32));
+fs.writeFileSync(path.join(__dirname, 'icon-48.png'), createCircularTotoroPNG(48));
+fs.writeFileSync(path.join(__dirname, 'icon-128.png'), createCircularTotoroPNG(128));
+
+console.log('Successfully created Circular Totoro Studio Ghibli PNG & SVG icons!');

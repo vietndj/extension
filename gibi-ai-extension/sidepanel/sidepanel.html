@@ -8,25 +8,48 @@
 </head>
 <body>
   <div class="gibi-app">
-    <!-- Header matching Miss Extension Series -->
+    <!-- Header matching Studio Ghibli Totoro Series -->
     <header class="gibi-header">
       <div class="gibi-brand">
-        <div class="brand-icon">
-          <svg viewBox="0 0 24 24" width="24" height="24" style="display: block;">
+        <div class="brand-icon" style="background: none; border: none; box-shadow: none; width: 36px; height: 36px;">
+          <svg viewBox="0 0 512 512" width="36" height="36" style="display: block;">
             <defs>
-              <linearGradient id="gibi-grad-brand" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#FCD34D" />
-                <stop offset="50%" stop-color="#F59E0B" />
-                <stop offset="100%" stop-color="#F43F5E" />
+              <linearGradient id="gSky" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#38BDF8"/>
+                <stop offset="100%" stop-color="#047857"/>
               </linearGradient>
+              <linearGradient id="gTotoro" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#94A3B8"/>
+                <stop offset="100%" stop-color="#475569"/>
+              </linearGradient>
+              <linearGradient id="gGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FDE047"/>
+                <stop offset="100%" stop-color="#D97706"/>
+              </linearGradient>
+              <clipPath id="cClip">
+                <circle cx="256" cy="256" r="240"/>
+              </clipPath>
             </defs>
-            <path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4h-2l2 4h-3l-2-4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z" fill="url(#gibi-grad-brand)"/>
+            <circle cx="256" cy="256" r="248" fill="none" stroke="url(#gGold)" stroke-width="16"/>
+            <g clip-path="url(#cClip)">
+              <circle cx="256" cy="256" r="240" fill="url(#gSky)"/>
+              <path d="M185 190 Q160 80 180 60 Q205 70 205 180 Z" fill="url(#gTotoro)"/>
+              <path d="M327 190 Q352 80 332 60 Q307 70 307 180 Z" fill="url(#gTotoro)"/>
+              <path d="M256 120 Q290 80 305 105 Q285 145 256 120 Z" fill="#22C55E"/>
+              <path d="M150 260 Q140 180 256 175 Q372 180 362 260 Q375 360 360 440 L152 440 Q137 360 150 260 Z" fill="url(#gTotoro)"/>
+              <ellipse cx="256" cy="355" rx="95" ry="90" fill="#FFFBEB"/>
+              <circle cx="210" cy="215" r="22" fill="#FFFFFF"/>
+              <circle cx="210" cy="215" r="8" fill="#0F172A"/>
+              <circle cx="302" cy="215" r="22" fill="#FFFFFF"/>
+              <circle cx="302" cy="215" r="8" fill="#0F172A"/>
+              <ellipse cx="256" cy="222" rx="14" ry="8" fill="#0F172A"/>
+            </g>
           </svg>
         </div>
         <div>
           <div class="brand-title" style="display: flex; align-items: center; gap: 6px;">
             <span id="title-text">Trợ lý GIBI</span>
-            <span class="brand-badge">Studio</span>
+            <span class="brand-badge" style="background: linear-gradient(135deg, #38BDF8 0%, #059669 100%); color: #fff;">Ghibli</span>
             <span id="edit-name-btn" style="cursor: pointer; opacity: 0.7; font-size: 11px; user-select: none;" title="Nhấp chuột để đổi tên">✏️</span>
             <button id="btn-reset-project" class="gibi-btn-icon-mini" title="Reset Dự Án">🔄</button>
           </div>
@@ -35,10 +58,10 @@
       </div>
     </header>
 
-    <!-- Onboarding Name View (Separate class from phase-panel) -->
+    <!-- Onboarding Name View (Premium Redesigned Card) -->
     <section id="panel-onboarding" class="onboarding-panel">
       <div class="onboarding-card">
-        <div class="onboarding-avatar">👋</div>
+        <div class="onboarding-avatar">🍃</div>
         <h2 class="onboarding-title">Chào Bạn! Gibi Rất Vui Được Gặp Bạn</h2>
         
         <div class="onboarding-bubble">
