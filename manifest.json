@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "GIBI AI - Ghibli Studio & Teleprompter",
+  "version": "1.0.0",
+  "description": "Trợ lý Đạo diễn Hoạt hình Studio Ghibli AI & Phòng thu đọc thoại tích hợp Google Flow (Veo 3)",
+  "permissions": [
+    "sidePanel",
+    "storage",
+    "tabs",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://gemini.google.com/*",
+    "https://labs.google/*"
+  ],
+  "action": {
+    "default_title": "Mở GIBI AI Studio"
+  },
+  "side_panel": {
+    "default_path": "sidepanel/sidepanel.html"
+  },
+  "background": {
+    "service_worker": "scripts/service-worker.js"
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  }
+}
