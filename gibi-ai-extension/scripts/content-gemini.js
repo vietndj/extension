@@ -9,6 +9,7 @@
 
     const badge = document.createElement('div');
     badge.id = 'gibi-studio-badge';
+    badge.title = 'Nhấp chuột để mở thanh GIBI AI Studio';
     badge.innerHTML = `
       <div class="gibi-badge-content">
         <span class="gibi-badge-icon">🎬</span>
@@ -38,7 +39,8 @@
       }
       #gibi-studio-badge:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(245, 166, 35, 0.4);
+        box-shadow: 0 6px 20px rgba(245, 166, 35, 0.45);
+        background: linear-gradient(135deg, #2a2a40 0%, #343454 100%);
       }
       .gibi-badge-content {
         display: flex;
@@ -71,7 +73,7 @@
     document.body.appendChild(badge);
 
     badge.addEventListener('click', () => {
-      alert('GIBI AI Studio đang hoạt động trên trang Gemini Chat!');
+      chrome.runtime.sendMessage({ action: 'OPEN_SIDE_PANEL' });
     });
   }
 
