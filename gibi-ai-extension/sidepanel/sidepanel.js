@@ -114,6 +114,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const btnStartPhase0 = document.getElementById('btn-start-phase-0');
   const btnResetProject = document.getElementById('btn-reset-project');
   const btnOpenGoogleFlow = document.getElementById('btn-open-google-flow');
+  const statusText = document.getElementById('status-text');
 
   // Restore saved script idea & ratio
   const stored = await chrome.storage.local.get(['scriptIdea', 'aspectRatio']);
@@ -176,17 +177,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         return response;
       } catch (retryErr) {
         console.error('[GIBI AI] Retry failed:', retryErr);
-        alert('Gibi AI vừa tự động mở trang Gemini Chat cho bạn rồi nè! Hãy bấm lại nút để chạy nhé.');
+        if (statusText) statusText.innerText = '⚠️ Đã mở Gemini Tab. Hãy bấm lại nút Kích hoạt!';
         return null;
       }
     }
   }
 
-  // Phase 0: Start Project with FULL UNTOUCHED MEGA PROMPT
+  // Phase 0: Start Project seamlessly WITHOUT annoying alert popups!
   btnStartPhase0.addEventListener('click', async () => {
     const scriptIdea = inputScriptIdea.value.trim();
     if (!scriptIdea) {
-      alert('Vui lòng nhập Ý tưởng / Kịch bản video của bạn!');
+      if (statusText) statusText.innerText = '⚠️ Vui lòng nhập Ý tưởng kịch bản trước!';
       return;
     }
 
@@ -203,17 +204,21 @@ Dưới đây là thông tin khởi tạo dự án:
 2. Tải lên ảnh chân dung: Bạn đã chuẩn bị ảnh chân dung để đính kèm.
 3. Tỷ lệ video: Aspect ratio ${selectedRatio}`;
 
+    if (statusText) statusText.innerText = '⏳ Đang truyền kịch bản sang Gemini Chat...';
+
     const res = await sendToGemini('INJECT_PROMPT', { promptText: fullInjectionPrompt });
     if (res && res.success) {
-      alert('✨ Đã kích hoạt dự án trên Gemini Chat! Bạn hãy đính kèm 1-3 ảnh chân dung trên khung chat Gemini để AI tạo Ảnh Căn Cước nhé.');
+      if (statusText) statusText.innerText = '✨ Đã gửi kịch bản! Hãy đính kèm ảnh chân dung ở khung chat.';
     }
   });
 
   // Open Google Flow Veo 3
-  btnOpenGoogleFlow.addEventListener('click', async () => {
-    await chrome.runtime.sendMessage({
-      target: 'background',
-      action: 'OPEN_FLOW_TAB'
+  if (btnOpenGoogleFlow) {
+    btnOpenGoogleFlow.addEventListener('click', async () => {
+      await chrome.runtime.sendMessage({
+        target: 'background',
+        action: 'OPEN_FLOW_TAB'
+      });
     });
-  });
+  }
 });
