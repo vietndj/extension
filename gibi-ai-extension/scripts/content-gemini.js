@@ -1,7 +1,7 @@
 // GIBI AI Content Script for gemini.google.com
 
 (function () {
-  console.log('[GIBI AI] Content Script Loaded on Gemini');
+  console.log('[GIBI AI] Content Script Active on Gemini');
 
   // Insert Floating Badge Indicator on Gemini UI
   function injectStudioBadge() {
@@ -76,26 +76,26 @@
 
   // Inject Prompt into Gemini Input Box
   async function injectPromptIntoGemini(promptText) {
-    // Find Gemini's rich input element
     const inputSelectors = [
       'rich-textarea p',
+      'rich-textarea [contenteditable="true"]',
       'rich-textarea .ql-editor',
       'div[contenteditable="true"]',
       'textarea[aria-label*="Prompt"]',
+      'textarea[aria-label*="nhập"]',
       'textarea'
     ];
 
     let inputEl = null;
     for (const selector of inputSelectors) {
       inputEl = document.querySelector(selector);
-      if (inputEl) break;
+      if (inputEl && inputEl.offsetWidth > 0) break;
     }
 
     if (!inputEl) {
       return { success: false, error: 'Không tìm thấy ô nhập liệu của Gemini. Vui lòng nhấp chuột vào ô chat Gemini.' };
     }
 
-    // Set focus and text
     inputEl.focus();
 
     if (inputEl.tagName === 'P' || inputEl.isContentEditable) {
@@ -104,19 +104,21 @@
       inputEl.value = promptText;
     }
 
-    // Dispatch input events so Gemini registers state change
+    // Comprehensive event dispatching to ensure Gemini state updates
+    inputEl.dispatchEvent(new InputEvent('input', { bubbles: true, inputType: 'insertText' }));
     inputEl.dispatchEvent(new Event('input', { bubbles: true }));
     inputEl.dispatchEvent(new Event('change', { bubbles: true }));
 
-    // Wait 300ms then click send button
-    await new Promise((resolve) => setTimeout(resolve, 300));
+    // Wait 350ms for Gemini to enable the send button
+    await new Promise((resolve) => setTimeout(resolve, 350));
 
     const sendBtnSelectors = [
       'button[aria-label*="Send"]',
       'button[aria-label*="Gửi"]',
       'button.send-button',
       '.send-button-container button',
-      'button[mat-icon-button]'
+      'button[mat-icon-button]',
+      'button.send-button-icon'
     ];
 
     let sendBtn = null;
@@ -130,7 +132,7 @@
       sendBtn.click();
       return { success: true, action: 'SENT' };
     } else {
-      // Fallback: Dispatch Enter key event
+      // Fallback: Dispatch Enter key
       const enterEvent = new KeyboardEvent('keydown', {
         key: 'Enter',
         code: 'Enter',
@@ -150,7 +152,6 @@
 
     textNodes.forEach((node) => {
       const text = node.innerText || node.textContent || '';
-      // Look for lines starting with 🗣️ Thoại: or 🗣️ **Thoại:**
       const regex = /(?:🗣️\s*\*?\*?Thoại:\*?\*?\s*["“]?([^"”\n]+)["”]?)/g;
       let match;
       while ((match = regex.exec(text)) !== null) {
@@ -189,7 +190,6 @@
     });
   }
 
-  // MutationObserver for continuous DOM enhancements
   const observer = new MutationObserver(() => {
     enhanceCodeBlocks();
   });
@@ -208,7 +208,7 @@
     }
   });
 
-  // Initialize badge on load
+  // Init
   if (document.readyState === 'complete') {
     injectStudioBadge();
     enhanceCodeBlocks();

@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
-  // Helper: Send message to active Gemini Tab
+  // Helper: Send message to active Gemini Tab (With auto dynamic script injection fallback)
   async function sendToGemini(action, payload = {}) {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     if (!tab) {
@@ -108,11 +108,29 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     try {
+      // First attempt to send message directly
       const response = await chrome.tabs.sendMessage(tab.id, { action, ...payload });
       return response;
     } catch (err) {
-      alert('Không thể kết nối với Gemini Chat. Vui lòng F5 làm mới lại trang Gemini.');
-      return null;
+      console.warn('[GIBI AI] Content script not responding, attempting dynamic script injection...', err);
+      try {
+        // Dynamically inject content script if tab was opened before extension load/reload
+        await chrome.scripting.executeScript({
+          target: { tabId: tab.id },
+          files: ['scripts/content-gemini.js']
+        });
+        
+        // Wait 250ms for script initialization
+        await new Promise((resolve) => setTimeout(resolve, 250));
+
+        // Retry sending message
+        const response = await chrome.tabs.sendMessage(tab.id, { action, ...payload });
+        return response;
+      } catch (retryErr) {
+        console.error('[GIBI AI] Retry failed:', retryErr);
+        alert('Không thể kết nối với Gemini Chat. Vui lòng bấm phím F5 (Reload) lại trang Gemini!');
+        return null;
+      }
     }
   }
 
