@@ -253,36 +253,58 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
-  // Helper: Send message to active Gemini Tab
+  // Smart Helper: Auto-detect, switch to, or create Gemini Tab automatically!
   async function sendToGemini(action, payload = {}) {
-    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    if (!tab) {
-      alert('Vui lòng mở tab Gemini Chat (gemini.google.com) trước khi thực hiện!');
-      return null;
+    // 1. Query all tabs in current window
+    const tabs = await chrome.tabs.query({ currentWindow: true });
+    let geminiTab = tabs.find((t) => t.active && t.url && t.url.includes('gemini.google.com'));
+
+    // 2. If active tab is not Gemini, check if ANY open tab is Gemini
+    if (!geminiTab) {
+      geminiTab = tabs.find((t) => t.url && t.url.includes('gemini.google.com'));
+      if (geminiTab) {
+        // Switch to open Gemini tab
+        await chrome.tabs.update(geminiTab.id, { active: true });
+      }
     }
 
-    if (!tab.url || !tab.url.includes('gemini.google.com')) {
-      alert('Tab hiện tại không phải là Gemini Chat. Vui lòng chuyển sang tab gemini.google.com!');
-      return null;
+    // 3. If NO Gemini tab exists in browser at all, automatically create one!
+    if (!geminiTab) {
+      console.log('[GIBI AI] No Gemini tab open, creating new tab automatically...');
+      geminiTab = await chrome.tabs.create({ url: 'https://gemini.google.com', active: true });
+
+      // Wait for tab loading to finish
+      await new Promise((resolve) => {
+        const listener = (tabId, changeInfo) => {
+          if (tabId === geminiTab.id && changeInfo.status === 'complete') {
+            chrome.tabs.onUpdated.removeListener(listener);
+            resolve();
+          }
+        };
+        chrome.tabs.onUpdated.addListener(listener);
+        // Safety timeout 8s
+        setTimeout(resolve, 8000);
+      });
     }
 
+    // 4. Send message to geminiTab with dynamic script injection fallback
     try {
-      const response = await chrome.tabs.sendMessage(tab.id, { action, ...payload });
+      const response = await chrome.tabs.sendMessage(geminiTab.id, { action, ...payload });
       return response;
     } catch (err) {
       console.warn('[GIBI AI] Content script not responding, attempting dynamic injection...', err);
       try {
         await chrome.scripting.executeScript({
-          target: { tabId: tab.id },
+          target: { tabId: geminiTab.id },
           files: ['scripts/content-gemini.js']
         });
         
-        await new Promise((resolve) => setTimeout(resolve, 250));
-        const response = await chrome.tabs.sendMessage(tab.id, { action, ...payload });
+        await new Promise((resolve) => setTimeout(resolve, 300));
+        const response = await chrome.tabs.sendMessage(geminiTab.id, { action, ...payload });
         return response;
       } catch (retryErr) {
         console.error('[GIBI AI] Retry failed:', retryErr);
-        alert('Không thể kết nối với Gemini Chat. Vui lòng bấm phím F5 (Reload) lại trang Gemini!');
+        alert('Gibi vừa tự động mở trang Gemini Chat cho bạn rồi nè! Hãy bấm lại nút lệnh để chạy nhé.');
         return null;
       }
     }
