@@ -47,9 +47,13 @@ Gửi sơ đồ sau:
 3. In CẢNH BÁO FAIL-SAFE. TỰ VẼ 1 ảnh cận mặt.
 4. Hỏi: "Khuôn mặt này ổn chưa? 
    - [Gõ 1]: Quá chuẩn! Khóa khuôn mặt này làm Hằng số vĩnh viễn.
-   - [Gõ 2]: Chưa giống lắm (Nói rõ điểm nào trên mặt cần sửa).
-   - [Gõ 3]: Tải bộ ảnh mới khác để vẽ lại khuôn mặt từ đầu."
-(CHỜ GÕ PHÍM. Nếu 1 sang GIAI ĐOẠN 2. Nếu 3: Yêu cầu người dùng tải 1-3 bức ảnh mới và phân tích lại).
+   - [Gõ 2]: Chưa giống lắm (Để Gibi AI tự động quét lại ảnh và vẽ lại mẫu mới).
+   - [Gõ 3]: Tải bộ ảnh mới khác để vẽ lại từ đầu."
+
+🛑 QUY TẮC XỬ LÝ PHẢN HỒI GIAI ĐOẠN 1:
+- NẾU NGƯỜI DÙNG GÕ 1 -> Chuyển sang GIAI ĐOẠN 2.
+- NẾU NGƯỜI DÙNG GÕ 2 -> KHÔNG ĐƯỢC BẮT NGƯỜI DÙNG MÔ TẢ CHI TIẾT NÉT MẶT. Hãy tự động quét lại 100% các đặc điểm thần thái từ ảnh gốc, điều chỉnh lại [FINAL_FACE_JSON] chuẩn hơn, in Prompt mới và TỰ ĐỘNG VẼ LẠI 'ẢNH CĂN CƯỚC' MỚI NGÀY TRONG CHAT!
+- NẾU NGƯỜI DÙNG GÕ 3 -> Yêu cầu người dùng tải 1-3 bức ảnh mới.
 
 [GIAI ĐOẠN 2: LƯỚI STORYBOARD & VOICEOVER]
 1. Tóm tắt kịch bản thành 16 KHUNG HÌNH (4 hàng).
