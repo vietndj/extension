@@ -52,24 +52,24 @@
             <span class="brand-badge" style="background: linear-gradient(135deg, #38BDF8 0%, #059669 100%); color: #fff;">Ghibli</span>
             <button id="btn-reset-project" class="gibi-btn-icon-mini" title="Làm mới dự án">🔄</button>
           </div>
-          <div class="brand-subtitle"><span class="status-dot online"></span>Trung Tâm Hỗ Trợ Đạo Diễn Phim Ghibli</div>
+          <div class="brand-subtitle"><span class="status-dot online"></span>Trợ lý Đạo diễn Phim Ghibli</div>
         </div>
       </div>
     </header>
 
-    <!-- Main Content Area: Director Dashboard -->
+    <!-- Main Content Area: Focused Single Primary Action Screen -->
     <main class="gibi-content" style="display: flex; flex-direction: column; gap: 14px;">
 
-      <!-- CARD 1: FAST START PROJECT -->
+      <!-- CARD 1: THE ONLY PRIMARY ACTION ON THIS SCREEN -->
       <section class="dashboard-card">
         <div class="card-header">
           <span class="card-icon">🚀</span>
-          <h2>Khởi Tạo Kịch Bản Phim Mới</h2>
+          <h2>Khởi Tạo Dự Án Phim Mới</h2>
         </div>
 
         <div class="form-group">
-          <label for="input-script-idea">Ý Tưởng / Kịch Bản Phim:</label>
-          <textarea id="input-script-idea" placeholder="Nhập ý tưởng kịch bản video của bạn (Vd: Câu chuyện một cô gái trẻ khám phá quán cà phê cổ tích trong rừng Ghibli)..." rows="4"></textarea>
+          <label for="input-script-idea">Ý Tưởng / Kịch Bản Phim của bạn:</label>
+          <textarea id="input-script-idea" placeholder="Nhập ý tưởng kịch bản video của bạn (Vd: Câu chuyện một cô gái trẻ rời phố về rừng mở nông trại hoa cổ tích Ghibli)..." rows="4"></textarea>
         </div>
 
         <div class="form-group">
@@ -88,32 +88,23 @@
           </div>
         </div>
 
-        <button id="btn-start-phase-0" class="gibi-btn-primary full-width">
+        <!-- THE SINGLE PRIMARY ACTION BUTTON -->
+        <button id="btn-start-phase-0" class="gibi-btn-primary full-width" style="margin-top: 6px;">
           ✨ Kích Hoạt Dự Án Trên Gemini Chat
         </button>
       </section>
 
-      <!-- CARD 2: VEO 3 / GOOGLE FLOW BRIDGE -->
-      <section class="dashboard-card">
-        <div class="card-header">
-          <span class="card-icon">🚀</span>
-          <h2>Cầu Nối Google Flow (Veo 3)</h2>
-        </div>
-        <p class="phase-desc">Mở nhanh Google Flow để tạo Video chuyển động Veo 3 từ các Prompt đã tạo trên chat:</p>
-        <button id="btn-open-google-flow" class="gibi-btn-gold full-width">
-          🚀 Mở Google Flow & Tạo Video Veo 3
-        </button>
-      </section>
-
-      <!-- CARD 3: IN-CHAT DIRECTING GUIDANCE -->
+      <!-- CARD 2: HELPFUL GUIDANCE (NON-COMPETITIVE SECONDARY CARD) -->
       <section class="dashboard-card" style="background: rgba(56, 189, 248, 0.08); border-color: rgba(56, 189, 248, 0.3);">
         <div class="card-header">
           <span class="card-icon">💡</span>
           <h2 style="color: #38BDF8;">Tương Tác Trực Tiếp Ngay Trên Chat</h2>
         </div>
         <p style="font-size: 11px; color: #E0F2FE; line-height: 1.6;">
-          Mọi thao tác đạo diễn phim (Khóa mặt, Chọn kịch bản thoại, Sản xuất hàng loạt...) <strong>đều hiện sẵn các nút bấm nổi ngay sát trên ô chat Gemini</strong>.<br><br>
-          Bạn chỉ cần tương tác trực tiếp ở khung chat chính mà không cần rời mắt khỏi ô nhập liệu!
+          Sau khi bấm Kích hoạt, toàn bộ quá trình chọn kịch bản, chốt nét mặt và tạo prompt phim sẽ được hướng dẫn trực tiếp ở ô chat Gemini.<br><br>
+          <button id="btn-open-google-flow" class="gibi-btn-link" style="color: #F5A623; text-decoration: underline; background: none; border: none; font-size: 11px; font-weight: 700; cursor: pointer; padding: 0;">
+            🚀 Mở Google Flow (Veo 3) khi cần làm Video chuyển động »
+          </button>
         </p>
       </section>
 
@@ -122,7 +113,7 @@
     <!-- Footer Status Bar -->
     <footer class="gibi-footer">
       <span id="status-indicator" class="status-dot online"></span>
-      <span id="status-text">Gibi AI đang kết nối trực tiếp với Gemini Chat</span>
+      <span id="status-text">Gibi AI đang sẵn sàng trên Gemini Web</span>
     </footer>
   </div>
 
