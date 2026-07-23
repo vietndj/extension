@@ -54,14 +54,20 @@
         border: 1px solid #f5a623 !important;
         color: #f5a623 !important;
         font-size: 11px !important;
+        font-weight: 600 !important;
         padding: 4px 10px !important;
         border-radius: 6px !important;
         cursor: pointer !important;
+        margin-top: 6px !important;
         margin-left: 8px !important;
-        transition: background 0.2s !important;
+        transition: all 0.2s !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 4px !important;
       }
       .gibi-btn-copy-prompt:hover {
         background: rgba(245, 166, 35, 0.3) !important;
+        transform: translateY(-1px) !important;
       }
     `;
 
@@ -164,26 +170,58 @@
     return voiceoverLines;
   }
 
-  // Scan Gemini DOM to enhance Codeblocks with 1-Click Copy
+  // Smart Codeblock Filter: Exclude diagrams, distinguish Image vs Video Prompt
   function enhanceCodeBlocks() {
-    const codeBlocks = document.querySelectorAll('pre code, .code-block-decoration');
+    const codeBlocks = document.querySelectorAll('pre code, pre, .code-block-decoration');
     codeBlocks.forEach((block) => {
       if (block.dataset.gibiEnhanced) return;
+
+      const text = (block.innerText || block.textContent || '').trim();
+
+      // Exclude ascii diagrams, flowchart diagrams or empty blocks
+      if (!text || text.includes('[ 🎬 QUY TRÌNH') || text.includes('=================') || text.includes('[PRE-PRODUCTION]')) {
+        block.dataset.gibiEnhanced = 'true';
+        return;
+      }
+
+      // Check if codeblock is actually a Prompt
+      const isPrompt = /aspect ratio|ghibli|close-up|camera|frame|veo|cinematic|portrait|grid/i.test(text);
+      if (!isPrompt) return;
+
       block.dataset.gibiEnhanced = 'true';
 
       const parentPre = block.closest('pre') || block.parentElement;
       if (!parentPre) return;
 
+      // Prevent duplicate button injection
+      if (parentPre.querySelector('.gibi-btn-copy-prompt')) return;
+
       const btn = document.createElement('button');
       btn.className = 'gibi-btn-copy-prompt';
-      btn.innerText = '🚀 Copy & Send to Veo 3';
+
+      // Distinguish Video Prompt (Veo 3) vs Image Prompt
+      const isVideoPrompt = /camera movement|micro-action|video prompt|veo 3|first frame/i.test(text);
+
+      if (isVideoPrompt) {
+        btn.innerText = '🚀 Copy & Send to Veo 3';
+      } else {
+        btn.innerText = '📋 Copy Prompt';
+      }
+
       btn.addEventListener('click', async () => {
-        const text = block.innerText || block.textContent;
         await navigator.clipboard.writeText(text);
-        chrome.runtime.sendMessage({
-          target: 'background',
-          action: 'OPEN_FLOW_TAB'
-        });
+        if (isVideoPrompt) {
+          await chrome.storage.local.set({ pendingVideoPrompt: text });
+          chrome.runtime.sendMessage({
+            target: 'background',
+            action: 'OPEN_FLOW_TAB'
+          });
+        } else {
+          btn.innerText = '✅ Đã Copy!';
+          setTimeout(() => {
+            btn.innerText = '📋 Copy Prompt';
+          }, 2000);
+        }
       });
 
       parentPre.appendChild(btn);
