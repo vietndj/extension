@@ -43,7 +43,7 @@ body {
   gap: 14px;
 }
 
-/* Header */
+/* Header matching Miss Extension Series */
 .gibi-header {
   display: flex;
   align-items: center;
@@ -58,44 +58,54 @@ body {
   gap: 10px;
 }
 
-.gibi-logo {
-  font-size: 24px;
-  filter: drop-shadow(0 0 8px var(--accent-gold-glow));
-}
-
-.gibi-title {
-  font-size: 15px;
-  font-weight: 800;
-  letter-spacing: 0.5px;
-  background: linear-gradient(135deg, #FFF 0%, var(--accent-gold) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.gibi-subtitle {
-  font-size: 10px;
-  color: var(--text-muted);
-  display: block;
-}
-
-.gibi-btn-icon {
-  background: transparent;
-  border: 1px solid var(--border-color);
-  color: var(--text-muted);
-  border-radius: var(--radius-sm);
-  width: 32px;
-  height: 32px;
-  cursor: pointer;
+.brand-icon {
+  width: 34px;
+  height: 34px;
+  background: rgba(245, 166, 35, 0.12);
+  border: 1px solid rgba(245, 166, 35, 0.3);
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s;
+  box-shadow: 0 0 12px var(--accent-gold-glow);
 }
 
-.gibi-btn-icon:hover {
-  border-color: var(--accent-gold);
-  color: var(--accent-gold);
-  background: rgba(245, 166, 35, 0.1);
+.brand-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: #FFF;
+}
+
+.brand-badge {
+  background: linear-gradient(135deg, var(--accent-gold) 0%, #F43F5E 100%);
+  color: #000;
+  font-size: 9px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.brand-subtitle {
+  font-size: 10px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+.gibi-btn-icon-mini {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 11px;
+  padding: 0 4px;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.gibi-btn-icon-mini:hover {
+  opacity: 1;
 }
 
 /* Stepper Bar */

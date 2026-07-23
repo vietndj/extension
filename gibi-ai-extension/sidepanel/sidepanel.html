@@ -3,21 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GIBI AI Studio</title>
+  <title>Gibi AI — Trợ Lý Đạo Diễn Ghibli</title>
   <link rel="stylesheet" href="sidepanel.css">
 </head>
 <body>
   <div class="gibi-app">
-    <!-- Header -->
+    <!-- Header matching Miss Extension Series -->
     <header class="gibi-header">
       <div class="gibi-brand">
-        <span class="gibi-logo">🎬</span>
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" width="24" height="24" style="display: block;">
+            <defs>
+              <linearGradient id="gibi-grad-brand" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FCD34D" />
+                <stop offset="50%" stop-color="#F59E0B" />
+                <stop offset="100%" stop-color="#F43F5E" />
+              </linearGradient>
+            </defs>
+            <path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4h-2l2 4h-3l-2-4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z" fill="url(#gibi-grad-brand)"/>
+          </svg>
+        </div>
         <div>
-          <h1 class="gibi-title">GIBI AI STUDIO</h1>
-          <span class="gibi-subtitle">Studio Ghibli Director & Teleprompter</span>
+          <div class="brand-title" style="display: flex; align-items: center; gap: 6px;">
+            <span id="title-text">Gibi AI</span>
+            <span class="brand-badge">Studio</span>
+            <button id="btn-reset-project" class="gibi-btn-icon-mini" title="Reset Dự Án">🔄</button>
+          </div>
+          <div class="brand-subtitle"><span class="status-dot online"></span>Trợ lý Đạo diễn Phim Ghibli & Teleprompter</div>
         </div>
       </div>
-      <button id="btn-reset-project" class="gibi-btn-icon" title="Reset Dự Án">🔄</button>
     </header>
 
     <!-- Stepper Navigation -->
