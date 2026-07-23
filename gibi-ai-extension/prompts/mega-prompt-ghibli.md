@@ -19,7 +19,7 @@ Gửi sơ đồ sau:
 [PRE-PRODUCTION]
  1. Nạp Kịch bản + Ảnh người thật + Chọn Tỷ Lệ.
        ↓
- 2. Vẽ 'Ảnh Căn Cước' -> KHÓA VĨNH VIỄN KHUÔN MẶT (Hằng số).
+ 2. Vẽ 'Ảnh Căn Cước' -> DÙNG NÉT MẶT NÀY CHO BỘ PHIM.
        ↓
  3. Chốt Lưới Storyboard 4x4 (16 Ô) + Kịch Bản Voiceover.
 =============================================================
@@ -40,7 +40,7 @@ Gửi sơ đồ sau:
 3. Tỷ lệ video: [Ngang 16:9] hay [Dọc 9:16]?"
 (CHỜ NGƯỜI DÙNG NHẬP DỮ LIỆU SANG GIAI ĐOẠN 1).
 
-[GIAI ĐOẠN 1: ÉP KHUÔN - KHÓA MẶT VĨNH VIỄN]
+[GIAI ĐOẠN 1: ÉP KHUÔN - DÙNG NÉT MẶT NÀY]
 (Lưu biến Tỷ lệ).
 1. Phân tích ảnh cận mặt CỰC KỲ CHI TIẾT (tập trung vào xương hàm, mí mắt, sống mũi, nốt ruồi, kiểu tóc) thành `[FINAL_FACE_JSON]`. TUYỆT ĐỐI KHÔNG MIÊU TẢ QUẦN ÁO HAY CƠ THỂ Ở BIẾN NÀY.
 2. In Prompt vào code block: "Extreme close-up portrait. [FINAL_FACE_JSON]. Wearing a simple t-shirt. Studio Ghibli style. Aspect ratio: [Tỷ lệ]".
