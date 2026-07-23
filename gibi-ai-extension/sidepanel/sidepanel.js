@@ -65,7 +65,7 @@ Gửi sơ đồ sau:
 5. Hỏi: "Lưới 16 ô và Kịch bản thoại đã xong. [Gõ 1]: Chọn KB 1 / [Gõ 2]: Chọn KB 2 / [Gõ 3]: Cần sửa lưới/thoại."
 (CHỜ GÕ PHÍM. Nếu 1 hoặc 2 sang GIAI ĐOẠN 3).
 
-[GIAI ĐOẠN 3: ĐẠO DIỄN THỰC ĐỊA FRAME 1 (POSE, ÁO, CẢNH)]
+[GIAI ĐOẠN 3: ĐẠO DIỄN THỰC ĐẠI FRAME 1 (POSE, ÁO, CẢNH)]
 1. Mô tả: "Kịch bản Frame 1 yêu cầu: [Nêu chi tiết hành động/bối cảnh]."
 2. YÊU CẦU DỮ LIỆU: "📸 **TRẠM KIỂM SOÁT THỰC ĐỊA:** Để Frame 1 cá nhân hóa 100%, **hãy tự mặc bộ quần áo bạn muốn, ngồi vào không gian thực tế và chụp 1 tấm ảnh đúng tư thế của kịch bản!** 
 Tôi sẽ quét ảnh này để trích xuất Quần áo + Tư thế + Bối cảnh, sau đó thay thế Khuôn mặt bạn đã khóa ở trên vào!
@@ -110,7 +110,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const btnStartPhase0 = document.getElementById('btn-start-phase-0');
   const btnResetProject = document.getElementById('btn-reset-project');
   const btnOpenGoogleFlow = document.getElementById('btn-open-google-flow');
-  const presetCards = document.querySelectorAll('.preset-card');
 
   // Restore saved script idea & ratio
   const stored = await chrome.storage.local.get(['scriptIdea', 'aspectRatio']);
@@ -119,18 +118,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const radio = document.querySelector(`input[name="aspect-ratio"][value="${stored.aspectRatio}"]`);
     if (radio) radio.checked = true;
   }
-
-  // Preset Card Clicks
-  presetCards.forEach((card) => {
-    card.addEventListener('click', () => {
-      const ideaText = card.dataset.idea;
-      if (ideaText) {
-        inputScriptIdea.value = ideaText;
-        inputScriptIdea.focus();
-        alert('Đã chọn kịch bản mẫu! Bấm "✨ Kích Hoạt Dự Án Trên Gemini Chat" để chạy nhé.');
-      }
-    });
-  });
 
   // Reset Project
   btnResetProject.addEventListener('click', async () => {
@@ -195,7 +182,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   btnStartPhase0.addEventListener('click', async () => {
     const scriptIdea = inputScriptIdea.value.trim();
     if (!scriptIdea) {
-      alert('Vui lòng nhập Ý tưởng / Kịch bản video của bạn hoặc chọn 1 Kịch bản mẫu bên dưới!');
+      alert('Vui lòng nhập Ý tưởng / Kịch bản video của bạn!');
       return;
     }
 
