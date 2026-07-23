@@ -364,7 +364,7 @@ Hãy gửi sơ đồ quy trình, xác nhận đã nhận được ý tưởng k�
     });
   }
 
-  // Inject Prompt into Gemini Input Box & Click Send
+  // Inject Prompt into Gemini Input Box & Guaranteed Auto-Click Send
   async function injectPromptIntoGemini(promptText) {
     const inputSelectors = [
       'rich-textarea p',
@@ -394,38 +394,66 @@ Hãy gửi sơ đồ quy trình, xác nhận đã nhận được ý tưởng k�
       inputEl.value = promptText;
     }
 
+    // Dispatch all framework events to notify Angular/Lit reactive bindings
+    ['input', 'change', 'blur'].forEach(evtName => {
+      inputEl.dispatchEvent(new Event(evtName, { bubbles: true }));
+    });
     inputEl.dispatchEvent(new InputEvent('input', { bubbles: true, inputType: 'insertText' }));
-    inputEl.dispatchEvent(new Event('input', { bubbles: true }));
-    inputEl.dispatchEvent(new Event('change', { bubbles: true }));
 
-    await new Promise((resolve) => setTimeout(resolve, 350));
+    // Give Gemini 500ms to process events and enable send button
+    await new Promise((resolve) => setTimeout(resolve, 500));
 
+    // Aggressively locate Send Button
     const sendBtnSelectors = [
-      'button[aria-label*="Send"]',
       'button[aria-label*="Gửi"]',
+      'button[aria-label*="Send"]',
+      'button[aria-label*="gửi"]',
+      'button[aria-label*="send"]',
+      'button[aria-label*="Submit"]',
       'button.send-button',
       '.send-button-container button',
-      'button[mat-icon-button]',
-      'button.send-button-icon'
+      'rich-textarea + button',
+      'button[mat-icon-button]'
     ];
 
     let sendBtn = null;
+
     for (const selector of sendBtnSelectors) {
       const btns = Array.from(document.querySelectorAll(selector));
-      sendBtn = btns.find((b) => !b.disabled && b.offsetWidth > 0);
+      sendBtn = btns.find((b) => b.offsetWidth > 0);
       if (sendBtn) break;
     }
 
+    if (!sendBtn) {
+      const inputContainer = inputEl.closest('form, .input-area, .chat-input-container, rich-textarea') || document.body;
+      const allBtns = Array.from(inputContainer.querySelectorAll('button'));
+      sendBtn = allBtns.find((b) => b.offsetWidth > 0 && !b.disabled);
+    }
+
     if (sendBtn) {
+      sendBtn.removeAttribute('disabled');
+      sendBtn.setAttribute('aria-disabled', 'false');
+      
+      // Dispatch click event
       sendBtn.click();
+      
+      // Backup click after 300ms if input not cleared yet
+      setTimeout(() => {
+        if (sendBtn && sendBtn.offsetWidth > 0) {
+          sendBtn.click();
+        }
+      }, 300);
+
       return { success: true, action: 'SENT' };
     } else {
+      // Fallback Keyboard Enter
       const enterEvent = new KeyboardEvent('keydown', {
         key: 'Enter',
         code: 'Enter',
         keyCode: 13,
         which: 13,
-        bubbles: true
+        bubbles: true,
+        cancelable: true
       });
       inputEl.dispatchEvent(enterEvent);
       return { success: true, action: 'ENTER_DISPATCHED' };
