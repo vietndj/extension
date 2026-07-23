@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Show Onboarding First
     panelOnboarding.style.display = 'flex';
     stepperNav.style.display = 'none';
-    phasePanels.forEach(p => { if (p !== panelOnboarding) p.style.display = 'none'; });
+    phasePanels.forEach(p => { p.style.display = 'none'; });
   }
 
   if (stored.scriptIdea) inputScriptIdea.value = stored.scriptIdea;
@@ -224,7 +224,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     phasePanels.forEach((panel, idx) => {
-      if (panel === panelOnboarding) return;
       if (idx === stepIndex) {
         panel.style.display = 'flex';
         panel.classList.add('active');
@@ -302,7 +301,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const nameStr = currentUserName ? currentUserName : 'bạn';
 
-    // Prepend user identity customization & Append initial user data to FULL_MEGA_PROMPT
     const fullInjectionPrompt = `⚠️ [CẤU HÌNH XƯNG HÔ THỜI GIAN THỰC]:
 Bạn là Trợ lý GIBI của ${nameStr}. Hãy tự xưng là "Gibi" và gọi tôi là "${nameStr}" trong toàn bộ quá trình sản xuất phim nhé!
 
