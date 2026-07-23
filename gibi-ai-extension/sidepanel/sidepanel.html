@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GIBI AI Studio</title>
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+  <div class="gibi-app">
+    <!-- Header -->
+    <header class="gibi-header">
+      <div class="gibi-brand">
+        <span class="gibi-logo">🎬</span>
+        <div>
+          <h1 class="gibi-title">GIBI AI STUDIO</h1>
+          <span class="gibi-subtitle">Studio Ghibli Director & Teleprompter</span>
+        </div>
+      </div>
+      <button id="btn-reset-project" class="gibi-btn-icon" title="Reset Dự Án">🔄</button>
+    </header>
+
+    <!-- Stepper Navigation -->
+    <nav class="gibi-stepper">
+      <div class="stepper-step active" data-step="0">
+        <span class="step-num">0</span>
+        <span class="step-label">Khởi tạo</span>
+      </div>
+      <div class="stepper-step" data-step="1">
+        <span class="step-num">1</span>
+        <span class="step-label">Khóa Mặt</span>
+      </div>
+      <div class="stepper-step" data-step="2">
+        <span class="step-num">2</span>
+        <span class="step-label">Storyboard</span>
+      </div>
+      <div class="stepper-step" data-step="3">
+        <span class="step-num">3</span>
+        <span class="step-label">Đạo Diễn</span>
+      </div>
+      <div class="stepper-step" data-step="4">
+        <span class="step-num">4</span>
+        <span class="step-label">Sản Xuất</span>
+      </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="gibi-content">
+
+      <!-- PHASE 0: INIT PANEL -->
+      <section id="panel-phase-0" class="phase-panel active">
+        <div class="card-header">
+          <span class="card-icon">🚀</span>
+          <h2>Giai Đoạn 0: Khởi Tạo Dự Án</h2>
+        </div>
+        
+        <div class="form-group">
+          <label for="input-script-idea">1. Ý Tưởng / Kịch Bản Phim:</label>
+          <textarea id="input-script-idea" placeholder="Nhập ý tưởng kịch bản video của bạn (Vd: Câu chuyện một cô gái trẻ khám phá quán cà phê cổ tích trong rừng Ghibli)..." rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>2. Tỷ Lệ Khung Hình Video:</label>
+          <div class="ratio-selector">
+            <label class="radio-card active">
+              <input type="radio" name="aspect-ratio" value="16:9" checked>
+              <span class="ratio-icon">📺</span>
+              <span class="ratio-text">Ngang 16:9 (Youtube)</span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="aspect-ratio" value="9:16">
+              <span class="ratio-icon">📱</span>
+              <span class="ratio-text">Dọc 9:16 (TikTok/Shorts)</span>
+            </label>
+          </div>
+        </div>
+
+        <button id="btn-start-phase-0" class="gibi-btn-primary full-width">
+          🚀 Kích Hoạt Dự Án Trên Gemini Chat
+        </button>
+      </section>
+
+      <!-- PHASE 1: FACE LOCK PANEL -->
+      <section id="panel-phase-1" class="phase-panel">
+        <div class="card-header">
+          <span class="card-icon">🔒</span>
+          <h2>Giai Đoạn 1: Ép Khuôn Nhân Vật</h2>
+        </div>
+        <p class="phase-desc">AI đã tạo 'Ảnh Căn Cước'. Vui lòng kiểm tra thần thái nét mặt nhân vật trên Gemini Chat.</p>
+
+        <div class="action-buttons-group">
+          <button id="btn-lock-face-yes" class="gibi-btn-success full-width">
+            🔒 [Phím 1] Rất Giống! Khóa Mặt Làm Hằng Số
+          </button>
+          <button id="btn-lock-face-no" class="gibi-btn-warning full-width">
+            🔄 [Phím 2] Chưa Giống (Yêu Cầu Sửa Nét Mặt)
+          </button>
+        </div>
+      </section>
+
+      <!-- PHASE 2: STORYBOARD & TELEPROMPTER -->
+      <section id="panel-phase-2" class="phase-panel">
+        <div class="card-header">
+          <span class="card-icon">🎙️</span>
+          <h2>Giai Đoạn 2: Voiceover & Teleprompter</h2>
+        </div>
+
+        <!-- Teleprompter Container -->
+        <div class="teleprompter-card">
+          <div class="teleprompter-header">
+            <span>🗣️ PHÒNG THU ĐỌC THOẠI</span>
+            <button id="btn-extract-voiceover" class="gibi-btn-sm">🔄 Tải Lại Thoại</button>
+          </div>
+          <div id="teleprompter-screen" class="teleprompter-screen">
+            <div id="teleprompter-text" class="teleprompter-text">
+              Chưa có kịch bản thoại. Hãy chạy Giai đoạn 2 trên Gemini để tải kịch bản...
+            </div>
+          </div>
+          <div class="teleprompter-controls">
+            <button id="btn-teleprompter-play" class="gibi-btn-control">▶ Chạy Chữ</button>
+            <button id="btn-teleprompter-pause" class="gibi-btn-control">⏸ Dừng</button>
+            <div class="control-speed">
+              <label for="slider-speed">Tốc độ:</label>
+              <input type="range" id="slider-speed" min="0.5" max="2.5" step="0.1" value="1.0">
+              <span id="speed-val">1.0x</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="action-buttons-group">
+          <button id="btn-select-script-1" class="gibi-btn-primary">
+            ✅ [Phím 1] Chọn Kịch Bản 1
+          </button>
+          <button id="btn-select-script-2" class="gibi-btn-secondary">
+            ✅ [Phím 2] Chọn Kịch Bản 2
+          </button>
+        </div>
+      </section>
+
+      <!-- PHASE 3: FIELD DIRECTING (LIVE-ACTION TO ANIME) -->
+      <section id="panel-phase-3" class="phase-panel">
+        <div class="card-header">
+          <span class="card-icon">📸</span>
+          <h2>Giai Đoạn 3: Đạo Diễn Thực Địa</h2>
+        </div>
+        <p class="phase-desc">Trạm kiểm soát Live-Action: Quét Trang phục + Tư thế + Bối cảnh thực tế của bạn!</p>
+
+        <!-- Dropzone for Live-action photo -->
+        <div id="dropzone-live-action" class="dropzone-card">
+          <span class="dropzone-icon">📷</span>
+          <span class="dropzone-title">Kéo thả hoặc Tải lên ảnh diễn xuất thật</span>
+          <span class="dropzone-sub">AI sẽ lấy Trang phục + Tư thế + Bối cảnh ghép với Mặt đã khóa!</span>
+          <input type="file" id="input-file-live-action" accept="image/*" style="display: none;">
+        </div>
+
+        <button id="btn-use-auto-scene" class="gibi-btn-outline full-width">
+          🎲 [Phím 0] Lười Chụp - Cho AI Tự Bịa Bối Cảnh
+        </button>
+      </section>
+
+      <!-- PHASE 4 & 5: PRODUCTION & GOOGLE FLOW VEO 3 -->
+      <section id="panel-phase-4" class="phase-panel">
+        <div class="card-header">
+          <span class="card-icon">🎬</span>
+          <h2>Giai Đoạn 4 & 5: Sản Xuất & Veo 3</h2>
+        </div>
+
+        <div class="production-card">
+          <h3>🚀 Cầu Nối Google Flow (Veo 3)</h3>
+          <p>Tự động xuất prompt video Frame 1 và bơm sang Veo 3 để làm video chuyển động.</p>
+          <button id="btn-open-google-flow" class="gibi-btn-gold full-width">
+            🚀 Mở Google Flow & Dán Prompt Veo 3
+          </button>
+        </div>
+
+        <div class="batch-controls">
+          <h3>📦 Sản Xuất Hàng Loạt Theo Hàng</h3>
+          <div class="batch-grid">
+            <button id="btn-batch-row-1" class="gibi-btn-row">Hàng 1 (F2-F4)</button>
+            <button id="btn-batch-row-2" class="gibi-btn-row">Hàng 2 (F5-F8)</button>
+            <button id="btn-batch-row-3" class="gibi-btn-row">Hàng 3 (F9-F12)</button>
+            <button id="btn-batch-row-4" class="gibi-btn-row">Hàng 4 (F13-F16)</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer Status Bar -->
+    <footer class="gibi-footer">
+      <span id="status-indicator" class="status-dot online"></span>
+      <span id="status-text">Đã sẵn sàng trên Gemini Web</span>
+    </footer>
+  </div>
+
+  <script src="sidepanel.js"></script>
+</body>
+</html>
