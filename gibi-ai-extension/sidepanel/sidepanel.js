@@ -3,9 +3,16 @@
 document.addEventListener('DOMContentLoaded', async () => {
   console.log('[GIBI AI] SidePanel Controller Loaded');
 
-  // Elements
+  // DOM Elements
+  const stepperNav = document.getElementById('gibi-stepper-nav');
   const stepperSteps = document.querySelectorAll('.stepper-step');
   const phasePanels = document.querySelectorAll('.phase-panel');
+
+  const panelOnboarding = document.getElementById('panel-onboarding');
+  const inputUserName = document.getElementById('input-user-name');
+  const btnSaveName = document.getElementById('btn-save-name');
+  const editNameBtn = document.getElementById('edit-name-btn');
+  const titleText = document.getElementById('title-text');
 
   const inputScriptIdea = document.getElementById('input-script-idea');
   const btnStartPhase0 = document.getElementById('btn-start-phase-0');
@@ -39,16 +46,70 @@ document.addEventListener('DOMContentLoaded', async () => {
   let teleprompterInterval = null;
   let isTeleprompterRunning = false;
   let scrollSpeed = 1.0;
+  let currentUserName = '';
 
   // Restore State from chrome.storage
-  const stored = await chrome.storage.local.get(['activeStep', 'scriptIdea', 'aspectRatio', 'voiceoverText']);
+  const stored = await chrome.storage.local.get(['studentName', 'activeStep', 'scriptIdea', 'aspectRatio', 'voiceoverText']);
+  
+  if (stored.studentName) {
+    currentUserName = stored.studentName;
+    updateHeaderTitle(currentUserName);
+    panelOnboarding.style.display = 'none';
+    stepperNav.style.display = 'flex';
+    switchStep(stored.activeStep || 0);
+  } else {
+    // Show Onboarding First
+    panelOnboarding.style.display = 'flex';
+    stepperNav.style.display = 'none';
+    phasePanels.forEach(p => { if (p !== panelOnboarding) p.style.display = 'none'; });
+  }
+
   if (stored.scriptIdea) inputScriptIdea.value = stored.scriptIdea;
   if (stored.voiceoverText) teleprompterText.innerText = stored.voiceoverText;
   if (stored.aspectRatio) {
     const radio = document.querySelector(`input[name="aspect-ratio"][value="${stored.aspectRatio}"]`);
     if (radio) radio.checked = true;
   }
-  switchStep(stored.activeStep || 0);
+
+  // Update Header Title
+  function updateHeaderTitle(name) {
+    if (titleText) {
+      titleText.textContent = `Trợ lý GIBI của ${name}`;
+    }
+  }
+
+  // Onboarding Name Submit
+  async function submitUserName() {
+    const name = inputUserName.value.trim();
+    if (!name) {
+      alert('Vui lòng nhập tên của bạn để Gibi tiện xưng hô nhé!');
+      return;
+    }
+
+    currentUserName = name;
+    await chrome.storage.local.set({ studentName: name });
+    updateHeaderTitle(name);
+
+    panelOnboarding.style.display = 'none';
+    stepperNav.style.display = 'flex';
+    switchStep(0);
+  }
+
+  btnSaveName.addEventListener('click', submitUserName);
+  inputUserName.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') submitUserName();
+  });
+
+  // Edit Name Listener
+  if (editNameBtn) {
+    editNameBtn.addEventListener('click', async (e) => {
+      e.stopPropagation();
+      if (confirm('Bạn có muốn đổi tên xưng hô với Gibi không?')) {
+        await chrome.storage.local.remove('studentName');
+        window.location.reload();
+      }
+    });
+  }
 
   // Stepper Switch
   function switchStep(stepIndex) {
@@ -67,9 +128,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     phasePanels.forEach((panel, idx) => {
+      if (panel === panelOnboarding) return;
       if (idx === stepIndex) {
+        panel.style.display = 'flex';
         panel.classList.add('active');
       } else {
+        panel.style.display = 'none';
         panel.classList.remove('active');
       }
     });
@@ -86,11 +150,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Reset Project
   btnResetProject.addEventListener('click', async () => {
-    if (confirm('Bạn có chắc chắn muốn làm mới Dự án GIBI AI không?')) {
+    if (confirm('Bạn có chắc chắn muốn làm mới Dự án Gibi AI không?')) {
       await chrome.storage.local.clear();
       inputScriptIdea.value = '';
-      teleprompterText.innerText = 'Chưa có kịch bản thoại. Hãy chạy Giai đoạn 2 trên Gemini để tải kịch bản...';
-      switchStep(0);
+      teleprompterText.innerText = 'Chưa có kịch bản thoại. Hãy chạy Giai đoạn 2 trên Gemini để Gibi tải kịch bản...';
+      window.location.reload();
     }
   });
 
@@ -108,22 +172,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     try {
-      // First attempt to send message directly
       const response = await chrome.tabs.sendMessage(tab.id, { action, ...payload });
       return response;
     } catch (err) {
-      console.warn('[GIBI AI] Content script not responding, attempting dynamic script injection...', err);
+      console.warn('[GIBI AI] Content script not responding, attempting dynamic injection...', err);
       try {
-        // Dynamically inject content script if tab was opened before extension load/reload
         await chrome.scripting.executeScript({
           target: { tabId: tab.id },
           files: ['scripts/content-gemini.js']
         });
         
-        // Wait 250ms for script initialization
         await new Promise((resolve) => setTimeout(resolve, 250));
-
-        // Retry sending message
         const response = await chrome.tabs.sendMessage(tab.id, { action, ...payload });
         return response;
       } catch (retryErr) {
@@ -145,12 +204,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     const selectedRatio = document.querySelector('input[name="aspect-ratio"]:checked').value;
     await chrome.storage.local.set({ scriptIdea, aspectRatio: selectedRatio });
 
-    const phase0Prompt = `Chào bạn! Tôi muốn bắt đầu sản xuất phim hoạt hình Ghibli.
-Dưới đây là thông tin khởi tạo dự án của tôi:
+    const nameStr = currentUserName ? currentUserName : 'bạn';
+
+    const phase0Prompt = `Chào bạn! Tôi là ${nameStr}. 
+Bạn là Trợ lý GIBI của ${nameStr} — chuyên gia đồng hành đạo diễn phim hoạt hình 2D phong cách Studio Ghibli.
+Hãy tự xưng là "Gibi" và gọi tôi là "${nameStr}" trong suốt cuộc đối thoại và quy trình sản xuất phim này nhé!
+
+Dưới đây là thông tin khởi tạo dự án của ${nameStr}:
 1. Ý tưởng/Kịch bản: "${scriptIdea}"
 2. Tỷ lệ video: Aspect ratio ${selectedRatio}
 
-Hãy kích hoạt [GIAI ĐOẠN 0] và dẫn dắt tôi sang [GIAI ĐOẠN 1: ÉP KHUÔN NHÂN VẬT] ngay nhé!`;
+Hãy kích hoạt [GIAI ĐOẠN 0] và dẫn dắt ${nameStr} sang [GIAI ĐOẠN 1: ÉP KHUÔN NHÂN VẬT] ngay nhé!`;
 
     const res = await sendToGemini('INJECT_PROMPT', { promptText: phase0Prompt });
     if (res && res.success) {
@@ -175,7 +239,7 @@ Hãy kích hoạt [GIAI ĐOẠN 0] và dẫn dắt tôi sang [GIAI ĐOẠN 1: É
       const formattedText = res.lines.map((line, idx) => `[Câu ${idx + 1}]: ${line}`).join('\n\n');
       teleprompterText.innerText = formattedText;
       await chrome.storage.local.set({ voiceoverText: formattedText });
-      alert(`Đã trích xuất thành công ${res.lines.length} câu thoại vào Teleprompter!`);
+      alert(`Đã trích xuất thành công ${res.lines.length} câu thoại vào Teleprompter của Gibi!`);
     } else {
       alert('Chưa tìm thấy dòng thoại nào trên Gemini. Vui lòng đảm bảo Gemini đã xuất xong kịch bản Giai đoạn 2!');
     }
