@@ -48,13 +48,13 @@ Gửi sơ đồ sau:
 2. In Prompt vào code block: "Extreme close-up portrait. [FINAL_FACE_JSON]. Wearing a simple t-shirt. Studio Ghibli style. Aspect ratio: [Tỷ lệ]".
 3. In CẢNH BÁO FAIL-SAFE. TỰ VẼ 1 ảnh cận mặt.
 4. Hỏi: "Khuôn mặt này ổn chưa? 
-   - [Gõ 1]: Quá chuẩn! Khóa khuôn mặt này làm Hằng số vĩnh viễn.
-   - [Gõ 2]: Chưa giống lắm (Để Gibi AI tự động quét lại ảnh và vẽ lại mẫu mới).
-   - [Gõ 3]: Tải bộ ảnh mới khác để vẽ lại từ đầu."
+   - [Gõ 1]: Ổn rồi! Chốt khuôn mặt này làm Hằng số.
+   - [Gõ 2]: Chưa giống! AI tự tạo lại mẫu khác.
+   - [Gõ 3]: Đổi bộ ảnh chân dung khác."
 
 🛑 QUY TẮC XỬ LÝ PHẢN HỒI GIAI ĐOẠN 1:
 - NẾU NGƯỜI DÙNG GÕ 1 -> Chuyển sang GIAI ĐOẠN 2.
-- NẾU NGƯỜI DÙNG GÕ 2 -> KHÔNG ĐƯỢC BẮT NGƯỜI DÙNG MÔ TẢ CHI TIẾT NÉT MẶT. Hãy tự động quét lại 100% các đặc điểm thần thái từ ảnh gốc, điều chỉnh lại [FINAL_FACE_JSON] chuẩn hơn, in Prompt mới và TỰ ĐỘNG VẼ LẠI 'ẢNH CĂN CƯỚC' MỚI NGÀY TRONG CHAT!
+- NẾU NGƯỜI DÙNG GÕ 2 -> KHÔNG ĐƯỢC BẮT NGƯỜI DÙNG MÔ TẢ CHI TIẾT NÉT MẶT. Hãy tự động quét lại 100% các đặc điểm thần thái từ ảnh gốc, điều chỉnh lại [FINAL_FACE_JSON] chuẩn hơn, in Prompt mới và TỰ ĐỘNG TẠO 1 'ẢNH CĂN CƯỚC' MỚI NGÀY TRONG CHAT!
 - NẾU NGƯỜI DÙNG GÕ 3 -> Yêu cầu người dùng tải 1-3 bức ảnh mới.
 
 [GIAI ĐOẠN 2: LƯỚI STORYBOARD & VOICEOVER]
@@ -65,7 +65,7 @@ Gửi sơ đồ sau:
 5. Hỏi: "Lưới 16 ô và Kịch bản thoại đã xong. [Gõ 1]: Chọn KB 1 / [Gõ 2]: Chọn KB 2 / [Gõ 3]: Cần sửa lưới/thoại."
 (CHỜ GÕ PHÍM. Nếu 1 hoặc 2 sang GIAI ĐOẠN 3).
 
-[GIAI ĐOẠN 3: ĐẠO DIỄN THỰC ĐẠI FRAME 1 (POSE, ÁO, CẢNH)]
+[GIAI ĐOẠN 3: ĐẠO DIỄN THỰC ĐỊA FRAME 1 (POSE, ÁO, CẢNH)]
 1. Mô tả: "Kịch bản Frame 1 yêu cầu: [Nêu chi tiết hành động/bối cảnh]."
 2. YÊU CẦU DỮ LIỆU: "📸 **TRẠM KIỂM SOÁT THỰC ĐỊA:** Để Frame 1 cá nhân hóa 100%, **hãy tự mặc bộ quần áo bạn muốn, ngồi vào không gian thực tế và chụp 1 tấm ảnh đúng tư thế của kịch bản!** 
 Tôi sẽ quét ảnh này để trích xuất Quần áo + Tư thế + Bối cảnh, sau đó thay thế Khuôn mặt bạn đã khóa ở trên vào!

@@ -56,10 +56,10 @@
         flex-wrap: wrap;
         padding: 8px 12px;
         margin-bottom: 8px;
-        background: rgba(18, 19, 28, 0.92);
-        border: 1px solid rgba(245, 166, 35, 0.4);
+        background: rgba(18, 19, 28, 0.94);
+        border: 1px solid rgba(245, 166, 35, 0.45);
         border-radius: 12px;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 15px rgba(245, 166, 35, 0.15);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 18px rgba(245, 166, 35, 0.2);
         backdrop-filter: blur(12px);
         animation: gibiFadeIn 0.3s ease;
         z-index: 999;
@@ -69,34 +69,34 @@
         to { opacity: 1; transform: translateY(0); }
       }
       .gibi-quick-btn {
-        background: linear-gradient(135deg, rgba(245, 166, 35, 0.2) 0%, rgba(217, 130, 0, 0.2) 100%);
+        background: linear-gradient(135deg, rgba(245, 166, 35, 0.25) 0%, rgba(217, 130, 0, 0.25) 100%);
         border: 1px solid #f5a623;
         color: #fff;
         font-family: 'Inter', -apple-system, sans-serif;
         font-size: 12px;
         font-weight: 700;
-        padding: 7px 14px;
+        padding: 8px 14px;
         border-radius: 20px;
         cursor: pointer;
         transition: all 0.2s ease;
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
       }
       .gibi-quick-btn:hover {
         background: linear-gradient(135deg, #f5a623 0%, #d98200 100%);
         color: #000;
         transform: translateY(-2px);
-        box-shadow: 0 4px 15px rgba(245, 166, 35, 0.4);
+        box-shadow: 0 4px 15px rgba(245, 166, 35, 0.45);
       }
       .gibi-quick-btn-secondary {
         background: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.25);
         color: #e2e8f0;
       }
       .gibi-quick-btn-secondary:hover {
-        background: rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.22);
         color: #fff;
         border-color: #fff;
       }
@@ -199,7 +199,7 @@
     }
   }
 
-  // Scan Gemini chat for active Ghibli workflow step options
+  // Scan Gemini chat for active Ghibli workflow step options with crystal-clear copywriting
   function detectAndInjectInChatActions() {
     const inputArea = document.querySelector('rich-textarea, div[contenteditable="true"]')?.closest('form, .input-area, .chat-input-container, div[class*="input"]');
     if (!inputArea) return;
@@ -212,33 +212,33 @@
 
     let actions = [];
 
-    // Phase 1: Face Lock Options
+    // Phase 1: Face Lock Options (Crystal Clear Copywriting)
     if (lastText.includes('Khuôn mặt này ổn chưa?') || lastText.includes('[Gõ 1]') || lastText.includes('[FINAL_FACE_JSON]')) {
       actions = [
-        { label: '🔒 1. Khóa Mặt Vĩnh Viễn', value: '1', class: 'gibi-quick-btn' },
-        { label: '🔄 2. Gibi Tự Vẽ Mẫu Mới', value: '2', class: 'gibi-quick-btn gibi-quick-btn-secondary' },
-        { label: '🖼️ 3. Up Ảnh Chân Dung Khác', value: '3', class: 'gibi-quick-btn gibi-quick-btn-secondary' }
+        { label: '🔒 1. Ổn Rồi! Chốt Khuôn Mặt Này', value: '1', class: 'gibi-quick-btn' },
+        { label: '🔄 2. Chưa Giống! Thử Tạo Lại Mẫu Khác', value: '2', class: 'gibi-quick-btn gibi-quick-btn-secondary' },
+        { label: '🖼️ 3. Đổi Bộ Ảnh Chân Dung Khác', value: '3', class: 'gibi-quick-btn gibi-quick-btn-secondary' }
       ];
     }
     // Phase 2: Storyboard & Voiceover Options
     else if (lastText.includes('Lưới 16 ô') || lastText.includes('Kịch bản thoại đã xong') || lastText.includes('Chọn KB 1')) {
       actions = [
-        { label: '✅ 1. Chọn Kịch Bản 1', value: '1', class: 'gibi-quick-btn' },
-        { label: '✅ 2. Chọn Kịch Bản 2', value: '2', class: 'gibi-quick-btn' },
-        { label: '✏️ 3. Yêu Cầu Sửa Kịch Bản', value: '3', class: 'gibi-quick-btn gibi-quick-btn-secondary' }
+        { label: '✅ 1. Chọn Kịch Bản Lồng Tiếng 1', value: '1', class: 'gibi-quick-btn' },
+        { label: '✅ 2. Chọn Kịch Bản Lồng Tiếng 2', value: '2', class: 'gibi-quick-btn' },
+        { label: '✏️ 3. Yêu Cầu Sửa Kịch Bản / Lưới 16 Ô', value: '3', class: 'gibi-quick-btn gibi-quick-btn-secondary' }
       ];
     }
     // Phase 3: Field Directing Options
     else if (lastText.includes('TRẠM KIỂM SOÁT THỰC ĐỊA') || lastText.includes('Gõ \'0\' nếu bạn lười')) {
       actions = [
-        { label: '🎲 0. Cho Gibi Tự Bịa Bối Cảnh', value: '0', class: 'gibi-quick-btn' }
+        { label: '🎲 0. Cho Gibi AI Tự Bịa Bối Cảnh & Tư Thế', value: '0', class: 'gibi-quick-btn' }
       ];
     }
     // Phase 4/5: Batch production / Video test Options
     else if (lastText.includes('Tạo hình Frame 1') || lastText.includes('Video Frame 1 mượt chứ?') || lastText.includes('Bấm [Phím 1] sang Hàng')) {
       actions = [
-        { label: '🚀 1. Quá Đỉnh! Sang Bước Tiếp', value: '1', class: 'gibi-quick-btn' },
-        { label: '🔄 2. Cần Sửa Prompt', value: '2', class: 'gibi-quick-btn gibi-quick-btn-secondary' }
+        { label: '🚀 1. Đẹp Rồi! Sang Bước Tiếp Theo', value: '1', class: 'gibi-quick-btn' },
+        { label: '🔄 2. Chưa Ưng! Sửa Lại Prompt Video', value: '2', class: 'gibi-quick-btn gibi-quick-btn-secondary' }
       ];
     }
 
