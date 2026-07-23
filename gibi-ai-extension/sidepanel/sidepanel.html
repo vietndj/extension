@@ -115,6 +115,14 @@
         <button id="btn-start-phase-0" class="gibi-btn-primary full-width">
           🚀 Kích Hoạt Dự Án Trên Gemini Chat
         </button>
+
+        <div id="phase0-guidance" style="display: none; background: rgba(56, 189, 248, 0.1); border: 1px solid #38BDF8; border-radius: var(--radius-md); padding: 10px; font-size: 11px; color: #E0F2FE; line-height: 1.5; margin-top: 8px;">
+          📸 <strong>BƯỚC TIẾP THEO:</strong> Vui lòng **tải lên 1-3 bức ảnh chân dung cận mặt** ở ô chat Gemini bên trái.<br><br>
+          Khi AI xuất xong <strong>'Ảnh Căn Cước'</strong> phong cách Ghibli, bấm nút dưới đây để sang Bước 1:
+          <button id="btn-goto-step-1" class="gibi-btn-gold full-width" style="margin-top: 8px; font-size: 12px; padding: 8px;">
+            ➡️ Đã Có 'Ảnh Căn Cước' -> Sang Bước 1 (Khóa Mặt)
+          </button>
+        </div>
       </section>
 
       <!-- PHASE 1: FACE LOCK PANEL -->
@@ -123,7 +131,9 @@
           <span class="card-icon">🔒</span>
           <h2>Giai Đoạn 1: Ép Khuôn Nhân Vật</h2>
         </div>
-        <p class="phase-desc">Gibi AI đã tạo 'Ảnh Căn Cước'. Vui lòng kiểm tra thần thái nét mặt nhân vật trên Gemini Chat.</p>
+        <div class="phase-desc" style="background: rgba(245, 166, 35, 0.1); border-left: 3px solid var(--accent-gold); padding: 8px; border-radius: 4px; font-size: 11px;">
+          📸 Hãy đảm bảo bạn đã tải lên 1-3 ảnh chân dung trên Gemini Chat và AI đã vẽ 1 tấm <strong>'Ảnh Căn Cước'</strong> cận mặt.
+        </div>
 
         <div class="action-buttons-group">
           <button id="btn-lock-face-yes" class="gibi-btn-success full-width">

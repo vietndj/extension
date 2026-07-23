@@ -106,6 +106,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   const inputScriptIdea = document.getElementById('input-script-idea');
   const btnStartPhase0 = document.getElementById('btn-start-phase-0');
   const btnResetProject = document.getElementById('btn-reset-project');
+  const phase0Guidance = document.getElementById('phase0-guidance');
+  const btnGotoStep1 = document.getElementById('btn-goto-step-1');
 
   const btnLockFaceYes = document.getElementById('btn-lock-face-yes');
   const btnLockFaceNo = document.getElementById('btn-lock-face-no');
@@ -146,7 +148,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (radio) radio.checked = true;
   }
 
-  // Switch straight to Phase 0 by default
+  // Switch to saved step
   switchStep(stored.activeStep || 0);
 
   // Stepper Switch
@@ -268,8 +270,13 @@ Dưới đây là thông tin khởi tạo dự án:
 
     const res = await sendToGemini('INJECT_PROMPT', { promptText: fullInjectionPrompt });
     if (res && res.success) {
-      switchStep(1);
+      phase0Guidance.style.display = 'block';
     }
+  });
+
+  // Transition from Phase 0 to Phase 1 after photo upload & portrait image generation
+  btnGotoStep1.addEventListener('click', () => {
+    switchStep(1);
   });
 
   // Phase 1: Lock Face
