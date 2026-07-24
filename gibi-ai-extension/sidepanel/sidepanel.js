@@ -1,5 +1,15 @@
 // GIBI AI Studio - Director Dashboard Sidepanel Controller
 
+const MEMORY_PROMPTS = {
+  '1': `Tôi muốn làm một bộ phim ngắn về "Bữa cơm bếp củi Mẹ nấu ngày đông lạnh". Ngày đó gia đình tôi tuy nghèo khó nhưng vô cùng ấm áp, gian bếp nhỏ bập bùng ánh lửa, khói tỏa nghi ngút và mâm cơm nóng hổi do tay Mẹ nấu. Miss GIBI hãy giúp tôi thiết kế bối cảnh gian bếp cổ điển tràn ngập hoài niệm, tạo cảm giác vô cùng ấm cúng (cozy) theo phong cách Studio Ghibli nhé!`,
+  '2': `Tôi muốn làm một bộ phim ngắn về "Chiếc xe đạp cọc cạch Ba chở qua cơn mưa". Đó là ký ức vô giá về người Ba vất vả thầm lặng chở tôi đi học dưới trời mưa tầm tã. Miss GIBI hãy giúp tôi thiết kế khung cảnh cơn mưa mùa hạ tươi mát, nước mưa gột rửa phố xá và bóng lưng ấm áp của Ba theo phong cách hoạt hình Ghibli nhiều xúc cảm nhé!`,
+  '3': `Tôi muốn làm một bộ phim ngắn về "Ký ức góc sân quê bình yên bên Ông Bà". Đó là khoảng thời gian bình yên nhất đời tôi dưới hiên nhà ngói đỏ, giàn mướp xanh và ánh nắng chiều tà (golden hour) rực rỡ. Miss GIBI hãy giúp tôi tái hiện lại góc sân quê và nụ cười hiền hậu của Ông Bà theo nét vẽ hoài niệm Studio Ghibli nhé!`,
+  '4': `Tôi muốn làm một bộ phim ngắn về "Mối tình đầu năm tháng cấp 3 dưới tàng cây". Đó là những rung động trong trẻo của tuổi học trò dưới tán phượng vĩ rực rỡ và bóng mát tàng cây mái trường. Miss GIBI hãy giúp tôi thiết kế thước phim thanh xuân rực rỡ mang nét vẽ cel-shaded đặc trưng của anime Ghibli nhé!`,
+  '5': `Tôi muốn làm một bộ phim ngắn về "Căn phòng trọ 10m2 những ngày đầu lập nghiệp". Ngày đó tôi rất vất vả nhưng đầy hoài bão. Tôi có một vài bức ảnh chụp căn phòng lộn xộn ngày xưa. Miss GIBI hãy giúp tôi thiết kế bối cảnh căn phòng này theo phong cách Lofi ấm áp của Ghibli, thể hiện sự nỗ lực làm việc giữa đêm khuya nhé!`,
+  '6': `Tôi muốn làm một bộ phim ngắn về "Hồi sinh người bạn thú cưng tuổi thơ đã xa". Đó là chú cưng thân thiết đã từng gắn bó suốt những năm tháng tuổi thơ của tôi. Miss GIBI hãy giúp tôi hồi sinh hình ảnh chú cưng đang chạy nhảy tung tăng trên cánh đồng cỏ xanh ngút ngàn dưới bầu trời mây trắng cổ tích Ghibli nhé!`,
+  '7': `Tôi muốn làm một bộ phim ngắn về "Gặp lại đứa trẻ bên trong và ước mơ thuở bé". Thuở bé tôi luôn mơ ước được bay lượn trên bầu trời rộng lớn. Miss GIBI hãy dùng thế mạnh kỳ ảo (Magic Realism) của Ghibli để giúp tôi vẽ lại hình ảnh đứa trẻ 5 tuổi đang cưỡi mây ngắm nhìn thế giới thần tiên nhé!`
+};
+
 const buildMegaPrompt = (userName = 'bạn') => `BẠN LÀ MISS GIBI — TRỢ LÝ ĐẠO DIỄN HOẠT HÌNH AI (STUDIO GHIBLI STYLE) CỦA ${userName.toUpperCase()}.
 Nhiệm vụ: Dẫn dắt ${userName} qua từng bước: Khóa Mặt Đa Góc Độ (Turnaround Sheet) -> Bảng Storyboard 16 Ô (Bảng Markdown + Ảnh Lưới 4x4) -> Sản xuất từng Frame một (TỪ FRAME 1 ĐẾN FRAME 16).
 Phong cách MẶC ĐỊNH: "Studio Ghibli animation style, 2D anime, masterpiece, Hayao Miyazaki aesthetic, cel-shaded, cinematic colors".
@@ -213,12 +223,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   });
 
-  // Idea chips selection listener
+  // Emotional Memory Idea chips selection listener (Autofill Rich Personalized Prompts)
   document.querySelectorAll('.idea-chip').forEach((chip) => {
     chip.addEventListener('click', () => {
-      const ideaText = chip.getAttribute('data-idea');
-      if (ideaText && inputScriptIdea) {
-        inputScriptIdea.value = ideaText;
+      const ideaId = chip.getAttribute('data-idea-id');
+      const richPrompt = MEMORY_PROMPTS[ideaId];
+      if (richPrompt && inputScriptIdea) {
+        inputScriptIdea.value = richPrompt;
         inputScriptIdea.focus();
       }
     });
