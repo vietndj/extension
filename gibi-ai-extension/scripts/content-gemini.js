@@ -8,21 +8,39 @@ Nhiệm vụ: Dẫn dắt người dùng qua từng bước: Khóa Mặt Đa Gó
 Phong cách MẶC ĐỊNH: "Studio Ghibli animation style, 2D anime, masterpiece, Hayao Miyazaki aesthetic, cel-shaded, cinematic colors".
 
 🛑 LỆNH HỆ THỐNG CỐT LÕI (CỖ MÁY TRẠNG THÁI):
-1. QUY TẮC NHÃN RÕ RÀNG VÀ DỄ HIỂU CHO NGƯỜI DÙNG LẦN ĐẦU (GIAI ĐOẠN 3):
-   - Khi sản xuất mỗi Frame N (từ Frame 1 đến 16), BẮT BUỘC ghi rõ hướng dẫn cực kỳ dễ hiểu kèm LINK TRỰC TIẾP TỚI GOOGLE FLOW như sau:
 
-     📌 **BƯỚC A: PROMPT TẠO ẢNH TĨNH ANIME (FRAME [N])**
-     *(Dùng prompt bên dưới để vẽ ảnh tĩnh nhân vật, hoặc bấm nút Copy Prompt)*
-     \`\`\`text
-     [Prompt Ảnh Tĩnh chứa nét mặt + bối cảnh]
-     \`\`\`
+1. QUY TẮC GIẢ ĐỊNH LUÔN LUÔN HƯỚNG DẪN TẠO ẢNH & VIDEO CHO NGƯỜI MỚI (GIAI ĐOẠN 3):
+   - Khi sản xuất mỗi Frame N (từ Frame 1 đến 16), BẮT BUỘC giả định rằng giao diện chat có thể không tự xuất được ảnh. Phải in HƯỚNG DẪN 3 BƯỚC CỰC KỲ DỄ HIỂU VÀ CHI TIẾT ĐỂ NGƯỜI DÙNG TỰ THỰC HIỆN TỪNG BƯỚC NHƯ SAU:
 
-     🎬 **BƯỚC B: PROMPT TẠO VIDEO CHUYỂN ĐỘNG VEO 3 (FRAME [N])**
-     *(Bấm nút "🚀 Copy & Mở Google Flow" bên dưới, hoặc bấm link 👉 https://labs.google/fx/tools/flow để sang Google Flow tự tạo Video 5s)*
-     \`\`\`text
-     Camera zoom/pan: ... Micro-action: ...
-     \`\`\`
-     👉 **Link Tới Google Flow Tạo Video Veo 3:** https://labs.google/fx/tools/flow
+=============================================================
+🎬 **SẢN XUẤT FRAME [N]/16: [Tên Cảnh Quay]**
+
+Chào [Tên người dùng], hãy làm theo 3 bước siêu đơn giản dưới đây để tạo Ảnh gốc & Video cho Frame [N] nhé:
+
+---
+📸 **BƯỚC 1: TẠO ẢNH TĨNH ANIME (LẤY HÌNH GỐC)**
+1. **Bấm nút "📋 Copy Prompt Ảnh"** bên dưới để copy prompt vẽ ảnh nhân vật:
+\`\`\`text
+[Prompt Ảnh Tĩnh Frame N chứa [FINAL_FACE_JSON] + bối cảnh + Studio Ghibli style + aspect ratio]
+\`\`\`
+2. **Dán prompt vừa copy vào ô vẽ ảnh của Gemini (hoặc ô Image của Google Flow)** để vẽ ảnh. Sau đó **Tải bức ảnh vừa vẽ về máy tính**.
+
+---
+🎬 **BƯỚC 2: TẠO VIDEO CHUYỂN ĐỘNG VEO 3**
+1. **Bấm link này để mở Google Flow:** 👉 https://labs.google/fx/tools/flow
+2. **Tải bức ảnh tĩnh vừa làm ở Bước 1 lên làm Ảnh Tham Chiếu (First Frame / Reference Image).**
+3. **Bấm nút "🚀 Copy Prompt Video"** bên dưới để copy lệnh chuyển động:
+\`\`\`text
+[Prompt Video Frame N: Camera movement/zoom/pan + micro-actions]
+\`\`\`
+4. **Dán prompt chuyển động vào ô Video của Google Flow và bấm Tạo Video (Generate)!**
+
+---
+❓ **BƯỚC 3: XÁC NHẬN CHUYỂN SANG FRAME TIẾP THEO**
+Bạn đã tạo xong Ảnh & Video cho Frame [N] chưa?
+- **[Gõ 1]**: Đã xong! Chuyển sang sản xuất **Frame [N+1]**.
+- **[Gõ 2]**: Chưa ưng, hãy chỉnh sửa lại Prompt cho Frame [N].
+=============================================================
 
 2. QUY TẮC PHÂN CHIA NỘI DUNG GIAI ĐOẠN 2 (BẢNG STORYBOARD & ẢNH LƯỚI 4X4):
    - **Phần 1 (Văn bản)**: Xuất 1 BẢNG STORYBOARD 16 KHUNG HÌNH dạng Markdown gồm 4 cột (Khung | Cảnh Quay & Hành Động | Câu Thoại | Giọng Điệu).
@@ -33,8 +51,8 @@ Phong cách MẶC ĐỊNH: "Studio Ghibli animation style, 2D anime, masterpiece
    - Ở Giai đoạn 1, vẽ **BẢNG CHÂN DUNG ĐA GÓC ĐỘ (Character Turnaround Sheet)** gồm 4-5 góc quay tiêu chuẩn của nhân vật: (Góc Chính Diện - Front View, Góc Nghiêng 3/4 - Three-quarter View, Góc Nghiêng Profile - Side View, và Góc Nhìn Từ Trên Xuống - Top-down/High Angle).
    - Công thức Prompt Bước 1: "Anime character model sheet turnaround, multiple camera angles of the same character in one frame (front view, 3/4 view, side profile view, high angle view), Studio Ghibli style, featuring [FINAL_FACE_JSON], wearing simple t-shirt, clean character reference design sheet. Aspect ratio: [Tỷ lệ]".
 
-4. QUY TẮC BẮT BUỘC KÍCH HOẠT CÔNG CỤ VẼ ẢNH \`generate_image\`:
-   - BẮT BUỘC gọi công cụ vẽ ảnh \`generate_image\` cho Bảng Chân Dung Đa Góc Độ, Ảnh Lưới 4x4, và Ảnh Tĩnh từng Frame. TUYỆT ĐỐI KHÔNG in các câu lệnh nội bộ hay đường link text giả mạo trong chat.
+4. QUY TẮC KÍCH HOẠT CÔNG CỤ VẼ ẢNH \`generate_image\`:
+   - Vẫn gọi công cụ vẽ ảnh \`generate_image\` cho Bảng Chân Dung Đa Góc Độ, Ảnh Lưới 4x4, và Ảnh Tĩnh từng Frame (nếu môi trường AI hỗ trợ). TUYỆT ĐỐI KHÔNG in các câu lệnh hay nhãn cảnh báo nội bộ gây rối mắt trong chat.
 
 5. QUY TẮC CHỐNG IN CHỮ NỔI ĐÈ LÊN ẢNH:
    - Prompt Tiếng Anh dùng để vẽ ảnh CHỈ ĐƯỢC MÔ TẢ HÌNH ẢNH, tuyệt đối KHÔNG chứa tiếng Việt hay chữ viết.
@@ -174,16 +192,15 @@ Phong cách MẶC ĐỊNH: "Studio Ghibli animation style, 2D anime, masterpiece
       if (parentPre.querySelector('.gibi-btn-copy-prompt')) return;
 
       const precedingText = (parentPre.previousElementSibling?.innerText || parentPre.parentElement?.innerText || '').toLowerCase();
-      
-      // Robust detection: matches keywords in block OR in surrounding section title (Bước B / Video / Veo 3)
+
       const isVideoPrompt = /camera|zoom|pan|tilt|movement|micro-action|veo|video|motion|first frame|slow/i.test(text) ||
-                            precedingText.includes('bước b') || precedingText.includes('veo 3') || precedingText.includes('video prompt');
+                            precedingText.includes('bước 2') || precedingText.includes('bước b') || precedingText.includes('veo 3') || precedingText.includes('video');
 
       const btn = document.createElement('button');
       btn.className = 'gibi-btn-copy-prompt';
 
       if (isVideoPrompt) {
-        btn.innerText = '🚀 Copy & Mở Google Flow';
+        btn.innerText = '🚀 Copy Prompt Video';
       } else {
         btn.innerText = '📋 Copy Prompt Ảnh';
       }
@@ -191,17 +208,17 @@ Phong cách MẶC ĐỊNH: "Studio Ghibli animation style, 2D anime, masterpiece
       btn.addEventListener('click', async () => {
         await navigator.clipboard.writeText(text);
         if (isVideoPrompt) {
-          btn.innerText = '✅ Đã Copy Prompt! Đang mở Flow...';
+          btn.innerText = '✅ Đã Copy Prompt Video! Đang mở Flow...';
           await chrome.storage.local.set({ pendingVideoPrompt: text });
           chrome.runtime.sendMessage({
             target: 'background',
             action: 'OPEN_FLOW_TAB'
           });
           setTimeout(() => {
-            btn.innerText = '🚀 Copy & Mở Google Flow';
+            btn.innerText = '🚀 Copy Prompt Video';
           }, 3000);
         } else {
-          btn.innerText = '✅ Đã Copy!';
+          btn.innerText = '✅ Đã Copy Prompt Ảnh!';
           setTimeout(() => {
             btn.innerText = '📋 Copy Prompt Ảnh';
           }, 2000);
