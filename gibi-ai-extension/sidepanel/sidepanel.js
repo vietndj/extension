@@ -165,6 +165,18 @@ document.addEventListener('DOMContentLoaded', async () => {
   const stepLine1 = document.getElementById('step-line-1');
   const stepLine2 = document.getElementById('step-line-2');
 
+  // Auto expand textarea height dynamically to fit full prompt text
+  const autoExpandTextarea = (el) => {
+    if (!el) return;
+    el.style.height = '85px';
+    const scrollH = el.scrollHeight;
+    if (scrollH > 85) {
+      el.style.height = Math.min(250, scrollH + 6) + 'px';
+    } else {
+      el.style.height = '85px';
+    }
+  };
+
   // Helper to update brand header text
   function updateBrandHeader(name) {
     if (!name || !name.trim()) {
@@ -202,7 +214,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       stepDot2.classList.add('completed');
       stepLine2.classList.add('active');
       stepDot3.classList.add('active');
-      if (inputScriptIdea) inputScriptIdea.focus();
+      if (inputScriptIdea) {
+        autoExpandTextarea(inputScriptIdea);
+        inputScriptIdea.focus();
+      }
     }
   }
 
@@ -217,6 +232,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   if (stored.scriptIdea && inputScriptIdea) {
     inputScriptIdea.value = stored.scriptIdea;
+    setTimeout(() => autoExpandTextarea(inputScriptIdea), 100);
+  }
+
+  if (inputScriptIdea) {
+    inputScriptIdea.addEventListener('input', () => autoExpandTextarea(inputScriptIdea));
   }
 
   if (stored.aspectRatio) {
@@ -238,13 +258,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   });
 
-  // Emotional Memory Idea chips selection listener (Autofill Rich Personalized Prompts)
+  // Emotional Memory Idea chips selection listener (Autofill Rich Personalized Prompts & Auto Expand Textarea)
   document.querySelectorAll('.idea-chip').forEach((chip) => {
     chip.addEventListener('click', () => {
       const ideaId = chip.getAttribute('data-idea-id');
       const richPrompt = MEMORY_PROMPTS[ideaId];
       if (richPrompt && inputScriptIdea) {
         inputScriptIdea.value = richPrompt;
+        autoExpandTextarea(inputScriptIdea);
         inputScriptIdea.focus();
       }
     });
