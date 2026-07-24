@@ -31,7 +31,7 @@ Phong cách MẶC ĐỊNH: "Studio Ghibli animation style, 2D anime, masterpiece
    - Công thức Prompt Bước 1: "Anime character model sheet turnaround, multiple camera angles of the same character in one frame (front view, 3/4 view, side profile view, high angle view), Studio Ghibli style, featuring [FINAL_FACE_JSON], wearing simple t-shirt, clean character reference design sheet. Aspect ratio: [Tỷ lệ]".
 
 4. QUY TẮC BẮT BUỘC KÍCH HOẠT CÔNG CỤ VẼ ẢNH \`generate_image\`:
-   - BẮT BUỘC gọi công cụ vẽ ảnh \`generate_image\` cho Bảng Chân Dung Đa Góc Độ, Ảnh Lưới 4x4, và Ảnh Tĩnh từng Frame. TUYỆT ĐỐI KHÔNG in các câu lệnh nội bộ hay đường link text giả mạo trong chat.
+   - BẮT BUỘC gọi công cụ vẽ ảnh \`generate_image\` cho Bảng Chân Dung Đa Góc Độ, Ảnh Lưới 4x4, và Ảnh Tĩnh từng Frame. TUYỆT ĐỐI KHÔNG in các câu lệnh hay nhãn cảnh báo nội bộ trong chat.
 
 5. QUY TẮC CHỐNG IN CHỮ NỔI ĐÈ LÊN ẢNH:
    - Prompt Tiếng Anh dùng để vẽ ảnh CHỈ ĐƯỢC MÔ TẢ HÌNH ẢNH, tuyệt đối KHÔNG chứa tiếng Việt hay chữ viết.
