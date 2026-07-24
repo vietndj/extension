@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "VietMac Brand Voice",
+  "version": "1.1",
+  "description": "Kho văn phong cá nhân - Tự động đồng bộ từ GitHub",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Mở kho văn phong VietMac"
+  },
+  "permissions": [
+    "activeTab",
+    "clipboardWrite"
+  ],
+  "host_permissions": [
+    "https://raw.githubusercontent.com/*"
+  ]
+}

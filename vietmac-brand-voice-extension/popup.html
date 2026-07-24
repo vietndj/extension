@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="header">
+    <h2>VietMac Voice 🚀</h2>
+    <div class="subtitle">Nhấn vào mẫu bất kỳ để Copy nhanh</div>
+  </div>
+  
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Tìm kiếm bối cảnh (Vd: học viên, Zalo)..." autocomplete="off">
+    <button id="copyAllBtn" class="btn-copy-all" title="Copy toàn bộ dữ liệu làm Prompt mẫu cho ChatGPT/Claude">🤖 Copy Full Prompt cho AI</button>
+  </div>
+  
+  <div id="loading" class="status-msg">
+    <div class="spinner"></div> Đang tải dữ liệu từ Local...
+  </div>
+  
+  <div id="error" class="status-msg hidden error-text">
+    ⚠️ Lỗi kết nối. Hãy chắc chắn bạn đã bật Local Server trong Terminal!
+  </div>
+  
+  <div id="template-list"></div>
+
+  <div id="toast" class="toast hidden">Đã copy thành công! ✅</div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>
