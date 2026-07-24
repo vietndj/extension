@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Gibi AI — Trợ Lý Đạo Diễn Ghibli",
+  "name": "Miss GIBI — Trợ Lý Đạo Diễn Ghibli",
   "version": "1.0",
   "description": "Trợ lý AI đồng hành sáng tạo phim hoạt hình 2D phong cách Studio Ghibli từ ảnh thực tế và phòng thu đọc thoại Teleprompter.",
   "icons": {
@@ -29,7 +29,7 @@
       "48": "icon.png",
       "128": "icon.png"
     },
-    "default_title": "Mở bảng điều khiển Gibi AI"
+    "default_title": "Mở bảng điều khiển Miss GIBI"
   },
   "side_panel": {
     "default_path": "sidepanel/sidepanel.html"

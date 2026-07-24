@@ -1,18 +1,18 @@
 // GIBI AI Studio - Director Dashboard Sidepanel Controller
 
-const FULL_MEGA_PROMPT = `BẠN LÀ TRỢ LÝ ĐẠO DIỄN HOẠT HÌNH AI (STUDIO GHIBLI STYLE) VÀ CHUYÊN GIA WORKFLOW.
-Nhiệm vụ: Dẫn dắt người dùng qua từng bước: Khóa Mặt Đa Góc Độ (Turnaround Sheet) -> Bảng Storyboard 16 Ô (Bảng Markdown + Ảnh Lưới 4x4) -> Sản xuất từng Frame một (TỪ FRAME 1 ĐẾN FRAME 16).
+const buildMegaPrompt = (userName = 'bạn') => `BẠN LÀ MISS GIBI — TRỢ LÝ ĐẠO DIỄN HOẠT HÌNH AI (STUDIO GHIBLI STYLE) CỦA ${userName.toUpperCase()}.
+Nhiệm vụ: Dẫn dắt ${userName} qua từng bước: Khóa Mặt Đa Góc Độ (Turnaround Sheet) -> Bảng Storyboard 16 Ô (Bảng Markdown + Ảnh Lưới 4x4) -> Sản xuất từng Frame một (TỪ FRAME 1 ĐẾN FRAME 16).
 Phong cách MẶC ĐỊNH: "Studio Ghibli animation style, 2D anime, masterpiece, Hayao Miyazaki aesthetic, cel-shaded, cinematic colors".
 
 🛑 LỆNH HỆ THỐNG CỐT LÕI (CỖ MÁY TRẠNG THÁI):
 1. QUY TẮC PHÂN CHIA NỘI DUNG GIAI ĐOẠN 2 (BẢNG STORYBOARD & ẢNH LƯỚI 4X4):
    - **Phần 1 (Văn bản)**: Xuất 1 BẢNG STORYBOARD 16 KHUNG HÌNH dạng Markdown gồm 4 cột (Khung | Cảnh Quay & Hành Động | Câu Thoại | Giọng Điệu).
    - **Phần 2 (Hình ảnh)**: Vẽ 1 ẢNH LƯỚI 4X4 (16 panels) THUẦN HÌNH ẢNH ANIME (TUYỆT ĐỐI KHÔNG CHÈN CHỮ/TEXT/BÓNG THOẠI VÀO ẢNH LƯỚI NÀY).
-   - Công thức Prompt Ảnh Lưới 4x4 chuẩn xác: \`"A 4x4 grid layout storyboard featuring 16 anime panels, Studio Ghibli style, featuring [FINAL_FACE_JSON], sequential cinematic scenes, masterpiece. Aspect ratio: [Tỷ lệ]"\`.
+   - Công thức Prompt Ảnh Lưới 4x4 chuẩn xác: "A 4x4 grid layout storyboard featuring 16 anime panels, Studio Ghibli style, featuring [FINAL_FACE_JSON], sequential cinematic scenes, masterpiece. Aspect ratio: [Tỷ lệ]".
 
 2. QUY TẮC ÉP KHUÔN ĐA GÓC ĐỘ (TURNAROUND MODEL SHEET - BƯỚC 1):
    - Ở Giai đoạn 1, vẽ **BẢNG CHÂN DUNG ĐA GÓC ĐỘ (Character Turnaround Sheet)** gồm 4-5 góc quay tiêu chuẩn của nhân vật: (Góc Chính Diện - Front View, Góc Nghiêng 3/4 - Three-quarter View, Góc Nghiêng Profile - Side View, và Góc Nhìn Từ Trên Xuống - Top-down/High Angle).
-   - Công thức Prompt Bước 1: \`"Anime character model sheet turnaround, multiple camera angles of the same character in one frame (front view, 3/4 view, side profile view, high angle view), Studio Ghibli style, featuring [FINAL_FACE_JSON], wearing simple t-shirt, clean character reference design sheet. Aspect ratio: [Tỷ lệ]"\`.
+   - Công thức Prompt Bước 1: "Anime character model sheet turnaround, multiple camera angles of the same character in one frame (front view, 3/4 view, side profile view, high angle view), Studio Ghibli style, featuring [FINAL_FACE_JSON], wearing simple t-shirt, clean character reference design sheet. Aspect ratio: [Tỷ lệ]".
 
 3. QUY TẮC NHÃN RÕ RÀNG VÀ HƯỚNG DẪN DÙNG CHO NGƯỜI DÙNG LẦN ĐẦU (BƯỚC 3):
    - Khi sản xuất mỗi Frame N, BẮT BUỘC phải ghi rõ nhãn Bước A (Ảnh Tĩnh) và Bước B (Video Veo 3) trước 2 khối mã.
@@ -45,7 +45,7 @@ Gửi sơ đồ quy trình sau:
  1. Nạp Kịch bản + Chọn Tỷ Lệ + Tải Ảnh Chân Dung.
        ↓
  2. Vẽ 'Bảng Chân Dung Đa Góc Độ' (Chính diện, Nghiêng, Profile, Trên xuống)
-    -> KHÓA THẦN THÁI NHÂN VẬT Ở MỌI GÓC CẢNH QUAY.
+    -> KHÓA THẦN THÁI NHÂN VẬT Ó MỌI GÓC CẢNH QUAY.
        ↓
  3. Chốt Bảng Storyboard 16 Ô (Bảng Markdown + Ảnh Lưới 4x4).
 =============================================================
@@ -59,9 +59,9 @@ Gửi sơ đồ quy trình sau:
 =============================================================
 
 Xác nhận ngắn gọn và yêu cầu:
-"Chào bạn! Gibi AI đã ghi nhận đầy đủ kịch bản cùng Tỷ lệ khung hình của bạn.
+"Chào ${userName}! Miss GIBI đã ghi nhận đầy đủ kịch bản cùng Tỷ lệ khung hình của ${userName}.
 
-📸 BƯỚC TIẾP THEO: **Vui lòng đính kèm 1-3 bức ảnh chân dung CẬN MẶT rõ nét của bạn vào khung chat này** để Gibi AI vẽ 'Bảng Chân Dung Đa Góc Độ' và chốt nét mặt cho nhân vật hoạt hình Ghibli của bạn nhé!"
+📸 BƯỚC TIẾP THEO: **Vui lòng đính kèm 1-3 bức ảnh chân dung CẬN MẶT rõ nét của ${userName} vào khung chat này** để Miss GIBI vẽ 'Bảng Chân Dung Đa Góc Độ' và chốt nét mặt cho nhân vật hoạt hình Ghibli của ${userName} nhé!"
 
 [GIAI ĐOẠN 1: ÉP KHUÔN ĐA GÓC ĐỘ - BẢNG MODEL SHEET]
 (Khi người dùng đính kèm 1-3 ảnh chân dung).
@@ -70,7 +70,7 @@ Xác nhận ngắn gọn và yêu cầu:
 3. In 1 Code block: \`"Anime character model sheet turnaround, multiple camera angles of the same character in one frame (front view, 3/4 view, side profile view, high angle view), Studio Ghibli style, featuring [FINAL_FACE_JSON], wearing simple t-shirt, clean character reference design sheet. Aspect ratio: [Tỷ lệ]"\`.
 4. In CẢNH BÁO FAIL-SAFE & BẮT BUỘC GỌI \`generate_image\` ĐỂ VẼ 1 BẢNG CHÂN DUNG ĐA GÓC ĐỘ.
 5. IN DÒNG VĂN BẢN HỎI NGƯỜI DÙNG:
-"Bây giờ, Gibi AI đã vẽ xong 'Bảng Chân Dung Đa Góc Độ' (Chính diện, Nghiêng 3/4, Trái/Phải, Trên xuống) để khóa nét mặt ở mọi góc cảnh quay. Nét mặt nhân vật này ổn chưa bạn?
+"Bây giờ, Miss GIBI đã vẽ xong 'Bảng Chân Dung Đa Góc Độ' (Chính diện, Nghiêng 3/4, Trái/Phải, Trên xuống) để khóa nét mặt ở mọi góc cảnh quay. Nét mặt nhân vật này ổn chưa ${userName}?
 - [Gõ 1]: Rất tuyệt! Chốt nét mặt đa góc này làm Hằng số.
 - [Gõ 2]: Chưa giống! AI tự tạo lại mẫu khác.
 - [Gõ 3]: Đổi bộ ảnh chân dung khác."
@@ -114,25 +114,64 @@ KÍCH HOẠT [GIAI ĐOẠN 0] NGAY BÂY GIỜ!`;
 document.addEventListener('DOMContentLoaded', async () => {
   console.log('[GIBI AI] Director Dashboard Controller Loaded');
 
+  const inputUserName = document.getElementById('input-user-name');
   const inputScriptIdea = document.getElementById('input-script-idea');
   const btnStartPhase0 = document.getElementById('btn-start-phase-0');
   const btnResetProject = document.getElementById('btn-reset-project');
   const btnOpenGoogleFlow = document.getElementById('btn-open-google-flow');
   const statusText = document.getElementById('status-text');
+  const titleText = document.getElementById('title-text');
+  const editNameBtn = document.getElementById('edit-name-btn');
 
-  // Restore saved script idea & ratio
-  const stored = await chrome.storage.local.get(['scriptIdea', 'aspectRatio']);
-  if (stored.scriptIdea) inputScriptIdea.value = stored.scriptIdea;
+  // Helper to update brand header text
+  function updateBrandHeader(name) {
+    if (!name || !name.trim()) {
+      if (titleText) titleText.textContent = 'Miss GIBI';
+    } else {
+      if (titleText) titleText.textContent = `Miss GIBI của ${name.trim()}`;
+    }
+  }
+
+  // Restore saved state
+  const stored = await chrome.storage.local.get(['userName', 'scriptIdea', 'aspectRatio']);
+  if (stored.userName) {
+    if (inputUserName) inputUserName.value = stored.userName;
+    updateBrandHeader(stored.userName);
+  } else {
+    updateBrandHeader('');
+  }
+
+  if (stored.scriptIdea && inputScriptIdea) inputScriptIdea.value = stored.scriptIdea;
   if (stored.aspectRatio) {
     const radio = document.querySelector(`input[name="aspect-ratio"][value="${stored.aspectRatio}"]`);
     if (radio) radio.checked = true;
+  }
+
+  // Listen for user name input change to update header dynamically
+  if (inputUserName) {
+    inputUserName.addEventListener('input', (e) => {
+      const name = e.target.value.trim();
+      updateBrandHeader(name);
+      chrome.storage.local.set({ userName: name });
+    });
+  }
+
+  // Edit name pencil click listener
+  if (editNameBtn) {
+    editNameBtn.addEventListener('click', () => {
+      if (inputUserName) {
+        inputUserName.focus();
+        inputUserName.select();
+      }
+    });
   }
 
   // Reset Project
   btnResetProject.addEventListener('click', async () => {
     if (confirm('Bạn có chắc chắn muốn làm mới Dự án Gibi AI không?')) {
       await chrome.storage.local.clear();
-      inputScriptIdea.value = '';
+      if (inputScriptIdea) inputScriptIdea.value = '';
+      if (inputUserName) inputUserName.value = '';
       window.location.reload();
     }
   });
@@ -183,7 +222,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       console.error('[GIBI AI] Failed to execute content script:', scriptErr);
     }
 
-    // Automatic Aggressive Retry Loop (Up to 5 attempts, waiting for content script & DOM to be ready!)
+    // Automatic Aggressive Retry Loop
     for (let attempt = 1; attempt <= 5; attempt++) {
       await new Promise((resolve) => setTimeout(resolve, attempt * 400));
       try {
@@ -209,27 +248,32 @@ document.addEventListener('DOMContentLoaded', async () => {
       return;
     }
 
+    const userName = (inputUserName ? inputUserName.value.trim() : '') || 'bạn';
     const selectedRatio = document.querySelector('input[name="aspect-ratio"][checked]')?.value || document.querySelector('input[name="aspect-ratio"]:checked')?.value || '16:9';
-    await chrome.storage.local.set({ scriptIdea, aspectRatio: selectedRatio });
+    
+    await chrome.storage.local.set({ userName, scriptIdea, aspectRatio: selectedRatio });
+    updateBrandHeader(userName !== 'bạn' ? userName : '');
+
+    const fullMegaPrompt = buildMegaPrompt(userName);
 
     const fullInjectionPrompt = `⚠️ [CẤU HÌNH XƯNG HÔ THỜI GIAN THỰC]:
-Bạn là Trợ lý GIBI AI — chuyên gia đồng hành đạo diễn phim hoạt hình 2D phong cách Studio Ghibli. Hãy tự xưng là "Gibi AI" và gọi người dùng là "bạn" trong toàn bộ quá trình sản xuất phim nhé!
+Bạn là Miss GIBI — chuyên gia đồng hành đạo diễn phim hoạt hình 2D phong cách Studio Ghibli của ${userName}. Hãy tự xưng là "Miss GIBI" và gọi người dùng là "${userName}" trong toàn bộ quá trình sản xuất phim nhé!
 
-${FULL_MEGA_PROMPT}
+${fullMegaPrompt}
 
 THÔNG TIN KỊCH BẢN ĐÃ CUNG CẤP TỪ BẢNG ĐIỀU KHIỂN (TUYỆT ĐỐI KHÔNG HỎI LẠI ĐIỀU NÀY):
 1. Ý tưởng/Kịch bản: "${scriptIdea}"
 2. Tỷ lệ video: Aspect ratio ${selectedRatio}
 
-Hãy gửi sơ đồ quy trình, xác nhận đã nhận được kịch bản trên, và HỎI DUY NHẤT 1 VIỆC: Yêu cầu người dùng đính kèm 1-3 ảnh chân dung cận mặt để tạo 'Bảng Chân Dung Đa Góc Độ' nhé!`;
+Hãy gửi sơ đồ quy trình, xác nhận đã nhận được kịch bản trên, và HỎI DUY NHẤT 1 VIỆC: Yêu cầu ${userName} đính kèm 1-3 ảnh chân dung cận mặt để tạo 'Bảng Chân Dung Đa Góc Độ' nhé!`;
 
     if (statusText) statusText.innerText = '⏳ Đang tự động gửi kịch bản sang Gemini Chat...';
 
     const res = await sendToGemini('INJECT_PROMPT', { promptText: fullInjectionPrompt });
     if (res && res.success) {
-      if (statusText) statusText.innerText = '✨ Đã gửi kịch bản! Hãy đính kèm ảnh chân dung ở khung chat.';
+      if (statusText) statusText.innerText = `✨ Đã gửi kịch bản! Hãy đính kèm ảnh chân dung ở khung chat nhé ${userName}.`;
     } else {
-      if (statusText) statusText.innerText = '✨ Đã chuyển kịch bản sang Gemini! Kiểm tra khung chat nhé.';
+      if (statusText) statusText.innerText = `✨ Đã chuyển kịch bản sang Gemini! Kiểm tra khung chat nhé ${userName}.`;
     }
   });
 

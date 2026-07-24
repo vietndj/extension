@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gibi AI — Trợ Lý Đạo Diễn Ghibli</title>
+  <title>Miss GIBI — Trợ Lý Đạo Diễn Ghibli</title>
   <link rel="stylesheet" href="sidepanel.css">
 </head>
 <body>
@@ -48,8 +48,9 @@
         </div>
         <div>
           <div class="brand-title" style="display: flex; align-items: center; gap: 6px;">
-            <span id="title-text">GIBI AI Studio</span>
+            <span id="title-text">Miss GIBI</span>
             <span class="brand-badge" style="background: linear-gradient(135deg, #38BDF8 0%, #059669 100%); color: #fff;">Ghibli</span>
+            <span id="edit-name-btn" style="cursor: pointer; opacity: 0.7; font-size: 12px; user-select: none;" title="Nhấp chuột để đổi tên">✏️</span>
             <button id="btn-reset-project" class="gibi-btn-icon-mini" title="Làm mới dự án">🔄</button>
           </div>
           <div class="brand-subtitle"><span class="status-dot online"></span>Trợ lý Đạo diễn Phim Ghibli</div>
@@ -65,6 +66,11 @@
         <div class="card-header">
           <span class="card-icon">🚀</span>
           <h2>Khởi Tạo Dự Án Phim Mới</h2>
+        </div>
+
+        <div class="form-group">
+          <label for="input-user-name">👤 Tên Của Bạn:</label>
+          <input id="input-user-name" type="text" placeholder="Nhập tên của bạn (Vd: Việt, An, Linh)..." style="width: 100%; background: #12131C; border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; color: #fff; padding: 8px 10px; font-size: 12px; outline: none; box-sizing: border-box;">
         </div>
 
         <div class="form-group">
@@ -99,7 +105,7 @@
     <!-- Footer Status Bar -->
     <footer class="gibi-footer">
       <span id="status-indicator" class="status-dot online"></span>
-      <span id="status-text">Gibi AI đang sẵn sàng trên Gemini Web</span>
+      <span id="status-text">Miss GIBI đang sẵn sàng trên Gemini Web</span>
     </footer>
   </div>
 
