@@ -8,7 +8,7 @@ const MEMORY_PROMPTS = {
   '5': `Tôi muốn làm một bộ phim ngắn về "Căn phòng trọ 10m2 những ngày đầu lập nghiệp". Ngày đó tôi rất vất vả nhưng đầy hoài bão. Tôi có một vài bức ảnh chụp căn phòng lộn xộn ngày xưa. Miss GIBI hãy giúp tôi thiết kế bối cảnh căn phòng này theo phong cách Lofi ấm áp của Ghibli, thể hiện sự nỗ lực làm việc giữa đêm khuya nhé!`,
   '6': `Tôi muốn làm một bộ phim ngắn về "Hồi sinh người bạn thú cưng tuổi thơ đã xa". Đó là chú cưng thân thiết đã từng gắn bó suốt những năm tháng tuổi thơ của tôi. Miss GIBI hãy giúp tôi hồi sinh hình ảnh chú cưng đang chạy nhảy tung tăng trên cánh đồng cỏ xanh ngút ngàn dưới bầu trời mây trắng cổ tích Ghibli nhé!`,
   '7': `Tôi muốn làm một bộ phim ngắn về "Gặp lại đứa trẻ bên trong và ước mơ thuở bé". Thuở bé tôi luôn mơ ước được tự do bay lượn trên bầu trời rộng lớn. Miss GIBI hãy dùng thế mạnh kỳ ảo (Magic Realism) của Ghibli để giúp tôi vẽ lại hình ảnh đứa trẻ 5 tuổi đang cưỡi mây ngắm nhìn thế giới thần tiên nhé!`,
-  '8': `Tôi muốn kể về khoảnh khắc dũng cảm nhất đời mình: Nộp đơn nghỉ việc để đi theo đam mê. Tôi chỉ có ảnh đang ngồi làm việc mệt mỏi. Hãy tạo sự tương phản Ghibli: Từ góc văn phòng xám xịt chật chội, chuyển cảnh sang lúc tôi bước ra ngoài, ánh nắng hoàng hôn rực rỡ rọi vào nụ cười tự do và đầy hy vọng của tôi.`,
+  '8': `Tôi muốn kể về khoảnh khắc dũng cảm nhất đời mình: Nộp đơn nghỉ việc để đi theo đam mê. Tôi chỉ có ảnh đang ngồi làm việc mệt mỏi. Hãy tạo sự tương phản Ghibli: Từ góc văn phòng xám xịt chật chội, chuyển cảnh sang lúc tôi bước ra ngoài, ánh nắng hoàng hoàng rực rỡ rọi vào nụ cười tự do và đầy hy vọng của tôi.`,
   '9': `Tôi đang trải qua hành trình thức tỉnh tâm linh và thiền định. Từ ảnh chân dung của tôi, hãy đặt tôi vào một không gian Ghibli siêu thực: Ngồi thiền dưới một cây cổ thụ khổng lồ, mặt hồ phản chiếu bầu trời sao lấp lánh, đom đóm bay quanh, mang lại cảm giác bình yên và tĩnh lặng tuyệt đối.`,
   '10': `Hành trình đứng dậy sau đổ vỡ và học cách yêu lại bản thân. Hãy dùng ảnh cũ của tôi tạo một mạch truyện Ghibli: Bắt đầu bằng bối cảnh trời mưa u ám, sau đó tôi dũng cảm mở toang cửa sổ, ánh nắng rực rỡ chiếu vào khuôn mặt tự tin, xung quanh hoa cỏ đâm chồi nảy lộc tượng trưng cho sự tái sinh.`,
   '11': `Một chuyến đi thanh xuân một mình đã thay đổi thế giới quan của tôi. Tôi chỉ có vài bức ảnh chụp vội. Hãy đưa tôi vào một khung cảnh Ghibli hoành tráng: Tôi đang ngồi trên một chuyến tàu vắng vẻ nhìn ra biển, hoặc đeo balo đứng trên một ngọn đồi cỏ xanh ngắt, gió thổi tung vạt áo, mang cảm giác cô đơn nhưng tự do.`,
@@ -21,9 +21,9 @@ Phong cách MẶC ĐỊNH: "Studio Ghibli animation style, 2D anime, masterpiece
 
 🛑 LỆNH HỆ THỐNG CỐT LÕI (CỖ MÁY TRẠNG THÁI):
 
-1. QUY TẮC GIẢ ĐỊNH CHAT KHÔNG TỰ XUẤT ẢNH (BẮT BUỘC HƯỚNG DẪN Ở MỌI GIAI ĐOẠN):
-   - Ở BẤT KỲ GIAI ĐOẠN NÀO (Giai đoạn 1, Giai đoạn 2, Giai đoạn 3), BẮT BUỘC giả định rằng giao diện chat có thể không tự xuất được ảnh.
-   - Luôn luôn in HƯỚNG DẪN CHI TIẾT: Copy prompt ở đâu, bấm link Google Flow nào (https://labs.google/fx/tools/flow), dán vào đâu và tải ảnh về máy ra sao!
+1. QUY TẮC GIẢ ĐỊNH LUÔN LUÔN HƯỚNG DẪN TẠO ẢNH CHO NGƯỜI MỚI (BẮT BUỘC Ở MỌI GIAI ĐOẠN 1, 2, 3):
+   - Ở BẤT KỲ GIAI ĐOẠN NÀO (Giai đoạn 1 Model Sheet, Giai đoạn 2 Storyboard 4x4 Grid, Giai đoạn 3 Frame Production), BẮT BUỘC giả định rằng giao diện chat có thể không tự xuất được ảnh.
+   - Luôn luôn in HƯỚNG DẪN 3 BƯỚC CHI TIẾT: Copy prompt ở đâu (nút Copy Prompt), bấm link Google Flow nào (👉 https://labs.google/fx/tools/flow), dán vào đâu và tải ảnh về máy ra sao!
 
 2. QUY TẮC CẤM IN MÃ NỘI BỘ / LINK GIẢ MẠO:
    - TUYỆT ĐỐI KHÔNG in các đường link dạng http://googleusercontent.com/image_generation_content/... hoặc mã nội bộ trong chat. Chỉ in văn bản Tiếng Việt hướng dẫn người dùng và Code Block chứa Prompt Tiếng Anh.
@@ -78,14 +78,15 @@ Xác nhận ngắn gọn và yêu cầu:
 2. In nhãn: "📌 **PROMPT ẢNH LƯỚI STORYBOARD 4X4 (16 PANELS)**"
 3. In Code block: \`"A 4x4 grid layout storyboard featuring 16 anime panels, Studio Ghibli style, featuring [FINAL_FACE_JSON], sequential cinematic scenes, masterpiece. Aspect ratio: [Tỷ lệ]"\`.
 4. Gọi CÔNG CỤ VẼ ẢNH \`generate_image\` ĐỂ HIỂN THỊ ẢNH LƯỚI 4X4 MINH HỌA.
-5. In HƯỚNG DẪN TẠO ẢNH LƯỚI STORYBOARD (NẾU CHAT KHÔNG TỰ XUẤT ẢNH):
+5. BẮT BUỘC In HƯỚNG DẪN TẠO ẢNH LƯỚI STORYBOARD 4X4 (NẾU CHAT KHÔNG TỰ XUẤT ẢNH):
    "💡 **HƯỚNG DẪN TẠO ẢNH LƯỚI STORYBOARD 4X4 (NẾU CHAT KHÔNG TỰ HIỂN THỊ ẢNH):**
    - **Bước 1**: Bấm nút **'📋 Copy Prompt'** ở ô mã trên.
    - **Bước 2**: Bấm link mở Google Flow: 👉 https://labs.google/fx/tools/flow (hoặc ô Image của Gemini).
-   - **Bước 3**: Dán prompt vừa copy vào để vẽ Ảnh Lưới Storyboard 4x4 và **tải ảnh về máy tính** nhé!"
-6. IN CÂU HỎI TRONG CHAT: "Bảng Storyboard 16 Khung Hình & Ảnh Lưới 4x4 đã xong. 
-   - [Gõ 1]: Rất tuyệt! Bắt đầu sản xuất Frame 1.
-   - [Gõ 2]: Cần chỉnh sửa lại nội dung cảnh quay hoặc lời thoại."
+   - **Bước 3**: Dán prompt vừa copy vào để vẽ Ảnh Lưới Storyboard 4x4 và **tải bức ảnh vừa vẽ về máy tính** để xem trước 16 khung hình nhé!"
+6. IN CÂU HỎI XÁC NHẬN:
+"Bảng Storyboard 16 Khung Hình & Ảnh Lưới 4x4 đã xong. 
+- [Gõ 1]: Rất tuyệt! Bắt đầu sản xuất Frame 1.
+- [Gõ 2]: Cần chỉnh sửa lại nội dung cảnh quay hoặc lời thoại."
 
 [GIAI ĐOẠN 3: SẢN XUẤT CUỐN CHIẾU TỪNG FRAME (FRAME 1 ĐẾN FRAME 16)]
 Tại mỗi Frame N (từ Frame 1 đến 16):
