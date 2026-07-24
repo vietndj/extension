@@ -265,6 +265,8 @@ textarea {
   padding: 10px;
   font-family: inherit;
   font-size: 12px;
+  min-height: 110px;
+  line-height: 1.5;
   resize: vertical;
   outline: none;
   transition: border-color 0.2s;
@@ -274,23 +276,23 @@ textarea:focus {
   border-color: var(--accent-gold);
 }
 
-/* Idea Tags / Suggestion Chips Container */
+textarea::-webkit-scrollbar {
+  width: 5px;
+}
+textarea::-webkit-scrollbar-thumb {
+  background: rgba(245, 166, 35, 0.4);
+  border-radius: 4px;
+}
+textarea::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* Idea Tags / Suggestion Chips Container (Natural Expansion - No Tight Scrollbars) */
 .idea-chips {
   display: flex;
   flex-direction: column;
   gap: 6px;
   margin-top: 4px;
-  max-height: 180px;
-  overflow-y: auto;
-  padding-right: 4px;
-}
-
-.idea-chips::-webkit-scrollbar {
-  width: 4px;
-}
-.idea-chips::-webkit-scrollbar-thumb {
-  background: rgba(245, 166, 35, 0.4);
-  border-radius: 4px;
 }
 
 .idea-chip {

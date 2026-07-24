@@ -7,7 +7,7 @@ const MEMORY_PROMPTS = {
   '4': `Tôi muốn làm một bộ phim ngắn về "Mối tình đầu năm tháng cấp 3 dưới tàng cây". Đó là những rung động trong trẻo của tuổi học trò dưới tán phượng vĩ rực rỡ và bóng mát tàng cây mái trường. Miss GIBI hãy giúp tôi thiết kế thước phim thanh xuân rực rỡ mang nét vẽ cel-shaded đặc trưng của anime Ghibli nhé!`,
   '5': `Tôi muốn làm một bộ phim ngắn về "Căn phòng trọ 10m2 những ngày đầu lập nghiệp". Ngày đó tôi rất vất vả nhưng đầy hoài bão. Tôi có một vài bức ảnh chụp căn phòng lộn xộn ngày xưa. Miss GIBI hãy giúp tôi thiết kế bối cảnh căn phòng này theo phong cách Lofi ấm áp của Ghibli, thể hiện sự nỗ lực làm việc giữa đêm khuya nhé!`,
   '6': `Tôi muốn làm một bộ phim ngắn về "Hồi sinh người bạn thú cưng tuổi thơ đã xa". Đó là chú cưng thân thiết đã từng gắn bó suốt những năm tháng tuổi thơ của tôi. Miss GIBI hãy giúp tôi hồi sinh hình ảnh chú cưng đang chạy nhảy tung tăng trên cánh đồng cỏ xanh ngút ngàn dưới bầu trời mây trắng cổ tích Ghibli nhé!`,
-  '7': `Tôi muốn làm một bộ phim ngắn về "Gặp lại đứa trẻ bên trong và ước mơ thuở bé". Thuở bé tôi luôn mơ ước được bay lượn trên bầu trời rộng lớn. Miss GIBI hãy dùng thế mạnh kỳ ảo (Magic Realism) của Ghibli để giúp tôi vẽ lại hình ảnh đứa trẻ 5 tuổi đang cưỡi mây ngắm nhìn thế giới thần tiên nhé!`
+  '7': `Tôi muốn làm một bộ phim ngắn về "Gặp lại đứa trẻ bên trong và ước mơ thuở bé". Thuở bé tôi luôn mơ ước được tự do bay lượn trên bầu trời rộng lớn. Miss GIBI hãy dùng thế mạnh kỳ ảo (Magic Realism) của Ghibli để giúp tôi vẽ lại hình ảnh đứa trẻ 5 tuổi đang cưỡi mây ngắm nhìn thế giới thần tiên nhé!`
 };
 
 const buildMegaPrompt = (userName = 'bạn') => `BẠN LÀ MISS GIBI — TRỢ LÝ ĐẠO DIỄN HOẠT HÌNH AI (STUDIO GHIBLI STYLE) CỦA ${userName.toUpperCase()}.
@@ -153,6 +153,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   const stepLine1 = document.getElementById('step-line-1');
   const stepLine2 = document.getElementById('step-line-2');
 
+  // Auto expand textarea height dynamically
+  const autoExpandTextarea = (el) => {
+    if (!el) return;
+    el.style.height = 'auto';
+    el.style.height = Math.max(110, el.scrollHeight + 6) + 'px';
+  };
+
   // Helper to update brand header text
   function updateBrandHeader(name) {
     if (!name || !name.trim()) {
@@ -190,7 +197,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       stepDot2.classList.add('completed');
       stepLine2.classList.add('active');
       stepDot3.classList.add('active');
-      if (inputScriptIdea) inputScriptIdea.focus();
+      if (inputScriptIdea) {
+        autoExpandTextarea(inputScriptIdea);
+        inputScriptIdea.focus();
+      }
     }
   }
 
@@ -203,7 +213,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     updateBrandHeader('');
   }
 
-  if (stored.scriptIdea && inputScriptIdea) inputScriptIdea.value = stored.scriptIdea;
+  if (stored.scriptIdea && inputScriptIdea) {
+    inputScriptIdea.value = stored.scriptIdea;
+    autoExpandTextarea(inputScriptIdea);
+  }
+
+  if (inputScriptIdea) {
+    inputScriptIdea.addEventListener('input', () => autoExpandTextarea(inputScriptIdea));
+  }
+
   if (stored.aspectRatio) {
     const radio = document.querySelector(`input[name="aspect-ratio"][value="${stored.aspectRatio}"]`);
     if (radio) {
@@ -230,6 +248,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const richPrompt = MEMORY_PROMPTS[ideaId];
       if (richPrompt && inputScriptIdea) {
         inputScriptIdea.value = richPrompt;
+        autoExpandTextarea(inputScriptIdea);
         inputScriptIdea.focus();
       }
     });
