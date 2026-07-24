@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Miss Idea — Trợ Lý Cố Vấn Nội Dung</title>
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24" width="24" height="24" style="display: block;">
+          <defs>
+            <linearGradient id="idea-grad-brand" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#8B5CF6" />
+              <stop offset="50%" stop-color="#A78BFA" />
+              <stop offset="100%" stop-color="#3B82F6" />
+            </linearGradient>
+          </defs>
+          <!-- Custom lightbulb + glowing star icon to represent ideas and intelligence -->
+          <path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.76 11.1l-.76.53V16H10v-2.37l-.76-.53C7.81 12.08 7 10.63 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.81 3.08-2.24 4.1z" fill="url(#idea-grad-brand)" />
+          <path d="M12 6a3 3 0 0 0-3 3 1 1 0 0 0 2 0 1 1 0 0 1 1-1 1 1 0 0 0 0-2z" fill="#A78BFA" opacity="0.9" />
+        </svg>
+      </div>
+      <div>
+        <div class="brand-title" style="display: flex; align-items: center; gap: 4px; flex-wrap: wrap;">
+          <span id="title-text">Miss Idea</span>
+          <span class="brand-badge">Coach</span>
+          <span id="edit-name-btn" style="cursor: pointer; opacity: 0.6; font-size: 11px; user-select: none;" title="Nhấp chuột để đổi tên học viên">✏️</span>
+        </div>
+        <div class="brand-subtitle"><span class="dot-online"></span>Cố vấn kịch bản Talking Head</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- PROGRESS BAR -->
+  <div class="pt"><div class="pf" id="prog"></div></div>
+
+  <!-- STATUS BAR (LIVE MONITOR) -->
+  <div id="status-bar" style="display: none; align-items: center; justify-content: space-between; padding: 10px 14px; background: #1e1e1f; border-bottom: 1px solid var(--border-color); font-size: 12px; color: var(--text-dim); z-index: 40; flex-shrink: 0;">
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <span class="pulse-dot"></span>
+      <span id="status-text">Đang đồng bộ với AI...</span>
+    </div>
+    <button id="close-panel-btn" style="background: transparent; border: none; color: var(--text-muted); cursor: pointer; font-size: 11px; font-weight: 600; padding: 2px 6px;">✖ Đóng</button>
+  </div>
+
+  <!-- CHAT AREA -->
+  <div id="chat">
+    <div class="cw" id="cw">
+      <!-- Chat bubbles will be rendered dynamically here -->
+    </div>
+  </div>
+
+  <!-- INPUT AREA -->
+  <div id="inp-area">
+    <div id="qtags"></div>
+    <div class="irow">
+      <input id="uin" type="text" autocomplete="off" placeholder="Nhập câu trả lời của bạn...">
+      <button id="sbtn">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display: block;"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast"></div>
+
+  <script src="sidepanel.js"></script>
+</body>
+</html>

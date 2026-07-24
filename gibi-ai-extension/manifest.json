@@ -4,10 +4,10 @@
   "version": "1.0",
   "description": "Trợ lý AI đồng hành sáng tạo phim hoạt hình 2D phong cách Studio Ghibli từ ảnh thực tế và phòng thu đọc thoại Teleprompter.",
   "icons": {
-    "16": "icon.png",
-    "32": "icon.png",
-    "48": "icon.png",
-    "128": "icon.png"
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
   },
   "permissions": [
     "sidePanel",
@@ -24,10 +24,10 @@
   },
   "action": {
     "default_icon": {
-      "16": "icon.png",
-      "32": "icon.png",
-      "48": "icon.png",
-      "128": "icon.png"
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
     },
     "default_title": "Mở bảng điều khiển Miss GIBI"
   },

@@ -1,0 +1,48 @@
+{
+  "manifest_version": 3,
+  "name": "Miss Idea — Trợ Lý Cố Vấn Nội Dung",
+  "version": "1.0",
+  "description": "Trợ lý Mentor AI đồng hành cùng chủ doanh nghiệp nhỏ từng bước lên kịch bản video Talking Head chân thực và hiệu quả.",
+  "icons": {
+    "16": "icon.png",
+    "32": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "permissions": [
+    "sidePanel",
+    "tabs",
+    "scripting",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://gemini.google.com/*",
+    "https://chatgpt.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_icon": {
+      "16": "icon.png",
+      "32": "icon.png",
+      "48": "icon.png",
+      "128": "icon.png"
+    },
+    "default_title": "Mở bảng điều khiển Miss Idea"
+  },
+  "side_panel": {
+    "default_path": "sidepanel/sidepanel.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://gemini.google.com/*",
+        "https://chatgpt.com/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ]
+}
