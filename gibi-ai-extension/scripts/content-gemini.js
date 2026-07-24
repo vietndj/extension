@@ -127,9 +127,15 @@ KÍCH HOẠT [GIAI ĐOẠN 0] NGAY BÂY GIỜ!`;
     ];
 
     let inputEl = null;
-    for (const selector of inputSelectors) {
-      inputEl = document.querySelector(selector);
-      if (inputEl && inputEl.offsetWidth > 0) break;
+
+    // Poll for up to 4 seconds if Gemini is still initializing DOM
+    for (let i = 0; i < 10; i++) {
+      for (const selector of inputSelectors) {
+        inputEl = document.querySelector(selector);
+        if (inputEl && inputEl.offsetWidth > 0) break;
+      }
+      if (inputEl) break;
+      await new Promise((resolve) => setTimeout(resolve, 400));
     }
 
     if (!inputEl) {
@@ -150,8 +156,8 @@ KÍCH HOẠT [GIAI ĐOẠN 0] NGAY BÂY GIỜ!`;
     });
     inputEl.dispatchEvent(new InputEvent('input', { bubbles: true, inputType: 'insertText' }));
 
-    // Give Gemini 400ms to process events and enable send button
-    await new Promise((resolve) => setTimeout(resolve, 400));
+    // Give Gemini 500ms to process events and enable send button
+    await new Promise((resolve) => setTimeout(resolve, 500));
 
     // Aggressively locate Send Button
     const sendBtnSelectors = [
