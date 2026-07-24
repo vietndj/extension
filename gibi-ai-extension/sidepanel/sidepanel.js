@@ -158,13 +158,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const stepLine1 = document.getElementById('step-line-1');
   const stepLine2 = document.getElementById('step-line-2');
 
-  // Auto expand textarea height dynamically
-  const autoExpandTextarea = (el) => {
-    if (!el) return;
-    el.style.height = 'auto';
-    el.style.height = Math.max(110, el.scrollHeight + 6) + 'px';
-  };
-
   // Helper to update brand header text
   function updateBrandHeader(name) {
     if (!name || !name.trim()) {
@@ -202,10 +195,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       stepDot2.classList.add('completed');
       stepLine2.classList.add('active');
       stepDot3.classList.add('active');
-      if (inputScriptIdea) {
-        autoExpandTextarea(inputScriptIdea);
-        inputScriptIdea.focus();
-      }
+      if (inputScriptIdea) inputScriptIdea.focus();
     }
   }
 
@@ -220,11 +210,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   if (stored.scriptIdea && inputScriptIdea) {
     inputScriptIdea.value = stored.scriptIdea;
-    autoExpandTextarea(inputScriptIdea);
-  }
-
-  if (inputScriptIdea) {
-    inputScriptIdea.addEventListener('input', () => autoExpandTextarea(inputScriptIdea));
   }
 
   if (stored.aspectRatio) {
@@ -253,7 +238,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       const richPrompt = MEMORY_PROMPTS[ideaId];
       if (richPrompt && inputScriptIdea) {
         inputScriptIdea.value = richPrompt;
-        autoExpandTextarea(inputScriptIdea);
         inputScriptIdea.focus();
       }
     });

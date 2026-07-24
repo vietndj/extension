@@ -1,4 +1,4 @@
-/* GIBI AI Studio CSS - Director Dashboard Theme */
+/* GIBI AI Studio CSS - Director Dashboard Theme (Zero Scrollbar Responsive Layout) */
 
 :root {
   --bg-primary: #12131C;
@@ -25,23 +25,28 @@
   padding: 0;
 }
 
+html, body {
+  height: 100%;
+  overflow: hidden; /* Strict Zero Body Scrollbar */
+}
+
 body {
   background-color: var(--bg-primary);
   color: var(--text-main);
   font-family: var(--font-sans);
   font-size: 13px;
-  line-height: 1.5;
+  line-height: 1.4;
   width: 100%;
-  min-height: 100vh;
-  overflow-x: hidden;
 }
 
 .gibi-app {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  padding: 14px;
-  gap: 14px;
+  height: 100vh;
+  padding: 12px;
+  gap: 10px;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 /* Header */
@@ -49,18 +54,19 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 10px;
+  padding-bottom: 8px;
   border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0;
 }
 
 .gibi-brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .brand-title {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 800;
   color: #FFF;
   display: flex;
@@ -97,14 +103,14 @@ body {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid var(--border-color);
   color: var(--text-main);
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 11px;
   transition: all 0.2s;
 }
 
@@ -122,7 +128,8 @@ body {
   background: rgba(26, 28, 44, 0.5);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
-  padding: 10px 16px;
+  padding: 8px 14px;
+  flex-shrink: 0;
 }
 
 .step-item {
@@ -143,12 +150,12 @@ body {
 }
 
 .step-num {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.1);
   color: var(--text-main);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 800;
   display: flex;
   align-items: center;
@@ -159,11 +166,11 @@ body {
 .step-item.active .step-num {
   background: var(--accent-gold);
   color: #000;
-  box-shadow: 0 0 10px var(--accent-gold-glow);
+  box-shadow: 0 0 8px var(--accent-gold-glow);
 }
 
 .step-lbl {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
   color: var(--text-main);
 }
@@ -172,7 +179,7 @@ body {
   flex: 1;
   height: 2px;
   background: rgba(255, 255, 255, 0.1);
-  margin: 0 8px;
+  margin: 0 6px;
   transition: all 0.3s;
 }
 
@@ -180,24 +187,37 @@ body {
   background: var(--accent-gold);
 }
 
-/* Dashboard Cards */
+/* Main Content Area */
+.gibi-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Dashboard Card - Takes exact remaining height */
 .dashboard-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
   background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  padding: 14px;
   backdrop-filter: blur(12px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
 }
 
 .step-view {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  min-height: 0;
+  gap: 8px;
+  overflow: hidden;
 }
 
 .step-view.hidden {
@@ -207,34 +227,43 @@ body {
 .card-header {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
+  flex-shrink: 0;
 }
 
 .card-icon {
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .card-header h2 {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
   color: var(--accent-gold);
 }
 
 .phase-desc {
-  font-size: 11px;
+  font-size: 10px;
   color: var(--text-muted);
-  line-height: 1.4;
+  line-height: 1.3;
+  flex-shrink: 0;
 }
 
 /* Form controls */
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.form-group.expand-flex {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .form-group label {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
   color: var(--text-main);
 }
@@ -245,9 +274,9 @@ input[type="text"] {
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   color: var(--text-main);
-  padding: 10px;
+  padding: 8px 10px;
   font-family: inherit;
-  font-size: 12px;
+  font-size: 11px;
   outline: none;
   transition: border-color 0.2s;
 }
@@ -256,19 +285,23 @@ input[type="text"]:focus {
   border-color: var(--accent-gold);
 }
 
+/* Textarea - Fixed compact height with internal scrollbar */
 textarea {
   width: 100%;
+  height: 85px;
+  min-height: 85px;
+  max-height: 95px;
   background: rgba(18, 19, 28, 0.9);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   color: var(--text-main);
-  padding: 10px;
+  padding: 8px 10px;
   font-family: inherit;
-  font-size: 12px;
-  min-height: 110px;
-  line-height: 1.5;
-  resize: vertical;
+  font-size: 11px;
+  line-height: 1.4;
+  resize: none;
   outline: none;
+  overflow-y: auto;
   transition: border-color 0.2s;
 }
 
@@ -277,7 +310,7 @@ textarea:focus {
 }
 
 textarea::-webkit-scrollbar {
-  width: 5px;
+  width: 4px;
 }
 textarea::-webkit-scrollbar-thumb {
   background: rgba(245, 166, 35, 0.4);
@@ -287,24 +320,40 @@ textarea::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.2);
 }
 
-/* Idea Tags / Suggestion Chips Container (Natural Expansion - No Tight Scrollbars) */
+/* Idea Chips List Container - Bounded Flex Scroll Container */
 .idea-chips {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  margin-top: 4px;
+  gap: 5px;
+  margin-top: 2px;
+  padding-right: 4px;
+}
+
+.idea-chips::-webkit-scrollbar {
+  width: 4px;
+}
+.idea-chips::-webkit-scrollbar-thumb {
+  background: var(--accent-gold);
+  border-radius: 4px;
+}
+.idea-chips::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .idea-chip {
   background: rgba(18, 19, 28, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-sm);
-  padding: 8px 10px;
-  font-size: 11px;
+  padding: 6px 8px;
+  font-size: 10px;
   color: #E2E8F0;
   cursor: pointer;
   transition: all 0.2s;
   line-height: 1.3;
+  flex-shrink: 0;
 }
 
 .idea-chip:hover {
@@ -318,7 +367,7 @@ textarea::-webkit-scrollbar-track {
 .ratio-selector {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: 8px;
 }
 
 .radio-card {
@@ -326,11 +375,11 @@ textarea::-webkit-scrollbar-track {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 4px;
   background: rgba(18, 19, 28, 0.7);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
-  padding: 14px 10px;
+  padding: 12px 8px;
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -345,26 +394,28 @@ textarea::-webkit-scrollbar-track {
 }
 
 .radio-text {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
 }
 
 .radio-sub {
-  font-size: 10px;
+  font-size: 9px;
   color: var(--text-muted);
 }
 
-/* PERFECT UI/UX NAV BUTTON ROW LOGIC */
+/* Nav Button Row - Always Docked at Bottom of Card */
 .nav-btn-row {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-top: 6px;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 4px;
+  flex-shrink: 0;
 }
 
 .gibi-btn-secondary {
-  flex: 0 0 95px;
-  height: 44px;
+  flex: 0 0 85px;
+  height: 40px;
   background: rgba(255, 255, 255, 0.08);
   color: var(--text-main);
   font-weight: 700;
@@ -372,7 +423,7 @@ textarea::-webkit-scrollbar-track {
   border-radius: var(--radius-md);
   cursor: pointer;
   transition: all 0.2s;
-  font-size: 12px;
+  font-size: 11px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -386,16 +437,16 @@ textarea::-webkit-scrollbar-track {
 
 .gibi-btn-primary {
   flex: 1;
-  height: 44px;
+  height: 40px;
   background: linear-gradient(135deg, var(--accent-gold) 0%, #D98200 100%);
   color: #000;
   font-weight: 800;
   border: none;
   border-radius: var(--radius-md);
   cursor: pointer;
-  box-shadow: 0 4px 15px var(--accent-gold-glow);
+  box-shadow: 0 4px 12px var(--accent-gold-glow);
   transition: all 0.2s;
-  font-size: 12px;
+  font-size: 11px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -405,7 +456,7 @@ textarea::-webkit-scrollbar-track {
 
 .gibi-btn-primary:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(245, 166, 35, 0.5);
+  box-shadow: 0 6px 18px rgba(245, 166, 35, 0.5);
 }
 
 .full-width {
@@ -418,10 +469,11 @@ textarea::-webkit-scrollbar-track {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding-top: 10px;
+  padding-top: 8px;
   border-top: 1px solid var(--border-color);
   font-size: 10px;
   color: var(--text-muted);
+  flex-shrink: 0;
 }
 
 .status-dot {
