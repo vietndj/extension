@@ -58,48 +58,96 @@
       </div>
     </header>
 
-    <!-- Main Content Area: Ultra-Clean Focused Single Card Screen -->
-    <main class="gibi-content" style="display: flex; flex-direction: column; gap: 14px;">
+    <!-- STEPPER PROGRESS HEADER -->
+    <div class="stepper-container">
+      <div class="step-item active" id="step-dot-1">
+        <div class="step-num">1</div>
+        <div class="step-lbl">Tên</div>
+      </div>
+      <div class="step-line" id="step-line-1"></div>
+      <div class="step-item" id="step-dot-2">
+        <div class="step-num">2</div>
+        <div class="step-lbl">Tỷ lệ</div>
+      </div>
+      <div class="step-line" id="step-line-2"></div>
+      <div class="step-item" id="step-dot-3">
+        <div class="step-num">3</div>
+        <div class="step-lbl">Ý tưởng</div>
+      </div>
+    </div>
 
-      <!-- CARD 1: THE ONLY CARD ON THIS SCREEN -->
+    <!-- MAIN STEPPER VIEWS CARD -->
+    <main class="gibi-content">
       <section class="dashboard-card">
-        <div class="card-header">
-          <span class="card-icon">🚀</span>
-          <h2>Khởi Tạo Dự Án Phim Mới</h2>
+
+        <!-- STEP 1: USER NAME -->
+        <div id="step-view-1" class="step-view">
+          <div class="card-header">
+            <span class="card-icon">👤</span>
+            <h2>Bước 1/3: Bạn tên là gì?</h2>
+          </div>
+          <p class="phase-desc">Vui lòng nhập tên của bạn để Miss GIBI đồng hành và xưng hô thân mật cùng bạn nhé!</p>
+          <div class="form-group">
+            <label for="input-user-name">Tên Của Bạn:</label>
+            <input id="input-user-name" type="text" placeholder="Nhập tên của bạn (Vd: Việt, An, Linh)...">
+          </div>
+          <button id="btn-next-step-1" class="gibi-btn-primary full-width">
+            Tiếp Tục ➔
+          </button>
         </div>
 
-        <div class="form-group">
-          <label for="input-user-name">👤 Tên Của Bạn:</label>
-          <input id="input-user-name" type="text" placeholder="Nhập tên của bạn (Vd: Việt, An, Linh)..." style="width: 100%; background: #12131C; border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; color: #fff; padding: 8px 10px; font-size: 12px; outline: none; box-sizing: border-box;">
-        </div>
-
-        <div class="form-group">
-          <label for="input-script-idea">Ý Tưởng / Kịch Bản Phim của bạn:</label>
-          <textarea id="input-script-idea" placeholder="Nhập ý tưởng kịch bản video của bạn (Vd: Câu chuyện một cô gái trẻ rời phố về rừng mở nông trại hoa cổ tích Ghibli)..." rows="4"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label>Tỷ Lệ Khung Hình Video:</label>
+        <!-- STEP 2: ASPECT RATIO -->
+        <div id="step-view-2" class="step-view hidden">
+          <div class="card-header">
+            <span class="card-icon">📺</span>
+            <h2>Bước 2/3: Chọn Tỷ Lệ Khung Hình Video</h2>
+          </div>
+          <p class="phase-desc">Tỷ lệ video phù hợp với nền tảng bạn dự định đăng tải:</p>
           <div class="ratio-selector">
             <label class="radio-card active">
               <input type="radio" name="aspect-ratio" value="16:9" checked>
-              <span class="ratio-icon">📺</span>
-              <span class="ratio-text">Ngang 16:9</span>
+              <span class="radio-text">📺 Ngang 16:9</span>
+              <span class="radio-sub">YouTube / TV</span>
             </label>
             <label class="radio-card">
               <input type="radio" name="aspect-ratio" value="9:16">
-              <span class="ratio-icon">📱</span>
-              <span class="ratio-text">Dọc 9:16</span>
+              <span class="radio-text">📱 Dọc 9:16</span>
+              <span class="radio-sub">TikTok / Shorts</span>
             </label>
+          </div>
+          <div class="nav-btn-row">
+            <button id="btn-back-step-2" class="gibi-btn-secondary">⬅ Quay lại</button>
+            <button id="btn-next-step-2" class="gibi-btn-primary">Tiếp Tục ➔</button>
           </div>
         </div>
 
-        <!-- THE SINGLE PRIMARY ACTION BUTTON -->
-        <button id="btn-start-phase-0" class="gibi-btn-primary full-width" style="margin-top: 6px;">
-          ✨ Kích Hoạt Dự Án Trên Gemini Chat
-        </button>
-      </section>
+        <!-- STEP 3: SCRIPT IDEA & LAUNCH -->
+        <div id="step-view-3" class="step-view hidden">
+          <div class="card-header">
+            <span class="card-icon">💡</span>
+            <h2>Bước 3/3: Ý Tưởng / Kịch Bản Phim</h2>
+          </div>
+          <p class="phase-desc">Nhập câu chuyện hoặc ý tưởng bạn muốn Miss GIBI chuyển thể thành Phim Hoạt Hình Ghibli:</p>
+          <div class="form-group">
+            <textarea id="input-script-idea" placeholder="Nhập ý tưởng của bạn (Vd: Câu chuyện từ bỏ công việc văn phòng gò bó để kinh doanh online)..." rows="4"></textarea>
+          </div>
+          <div class="form-group">
+            <label style="font-size: 10px; color: var(--text-muted);">Gợi ý ý tưởng nhanh (Bấm để chọn):</label>
+            <div class="idea-chips">
+              <div class="idea-chip" data-idea="Câu chuyện một cô gái trẻ rời phố về rừng mở nông trại hoa cổ tích phong cách Ghibli">🌸 Rời phố về rừng mở nông trại hoa cổ tích</div>
+              <div class="idea-chip" data-idea="Hành trình từ bỏ công việc văn phòng gò bó 8 tiếng để theo đuổi ước mơ kinh doanh tự do">💼 Từ bỏ công việc văn phòng kinh doanh tự do</div>
+              <div class="idea-chip" data-idea="Cậu bé vô tình nhặt được một sinh vật huyền bí trong rừng sâu và chuyến phiêu lưu kỳ diệu">🍃 Cậu bé và sinh vật huyền bí rừng sâu</div>
+            </div>
+          </div>
+          <div class="nav-btn-row">
+            <button id="btn-back-step-3" class="gibi-btn-secondary">⬅ Quay lại</button>
+            <button id="btn-start-phase-0" class="gibi-btn-primary">
+              ✨ Kích Hoạt Dự Án Trợ Lý Miss GIBI
+            </button>
+          </div>
+        </div>
 
+      </section>
     </main>
 
     <!-- Footer Status Bar -->
