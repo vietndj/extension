@@ -63,6 +63,9 @@ body {
   font-size: 15px;
   font-weight: 800;
   color: #FFF;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .brand-badge {
@@ -71,6 +74,8 @@ body {
   padding: 2px 6px;
   border-radius: 4px;
   text-transform: uppercase;
+  background: linear-gradient(135deg, #38BDF8 0%, #059669 100%);
+  color: #fff;
 }
 
 .brand-subtitle {
@@ -81,19 +86,32 @@ body {
   gap: 4px;
 }
 
-.gibi-btn-icon-mini {
-  background: transparent;
-  border: none;
-  color: var(--text-muted);
-  cursor: pointer;
-  font-size: 11px;
-  padding: 0 4px;
-  opacity: 0.7;
-  transition: opacity 0.2s;
+/* Right-aligned Clean Action Buttons in Header */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.gibi-btn-icon-mini:hover {
-  opacity: 1;
+.header-action-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s;
+}
+
+.header-action-btn:hover {
+  background: rgba(245, 166, 35, 0.2);
+  border-color: var(--accent-gold);
+  transform: translateY(-1px);
 }
 
 /* Stepper Progress Bar */
@@ -321,52 +339,58 @@ textarea:focus {
   color: var(--text-muted);
 }
 
-/* Nav Button Row */
+/* PERFECT UI/UX NAV BUTTON ROW LOGIC */
 .nav-btn-row {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   margin-top: 6px;
 }
 
-/* Buttons */
+.gibi-btn-secondary {
+  flex: 0 0 95px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-main);
+  font-weight: 700;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.gibi-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
 .gibi-btn-primary {
   flex: 1;
+  height: 44px;
   background: linear-gradient(135deg, var(--accent-gold) 0%, #D98200 100%);
   color: #000;
   font-weight: 800;
   border: none;
-  padding: 12px;
   border-radius: var(--radius-md);
   cursor: pointer;
   box-shadow: 0 4px 15px var(--accent-gold-glow);
   transition: all 0.2s;
   font-size: 12px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
+  white-space: nowrap;
 }
 
 .gibi-btn-primary:hover {
   transform: translateY(-1px);
   box-shadow: 0 6px 20px rgba(245, 166, 35, 0.5);
-}
-
-.gibi-btn-secondary {
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--text-main);
-  font-weight: 700;
-  border: 1px solid var(--border-color);
-  padding: 12px 14px;
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  transition: all 0.2s;
-  font-size: 12px;
-}
-
-.gibi-btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.15);
 }
 
 .full-width {
